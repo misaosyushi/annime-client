@@ -1,32 +1,29 @@
 <template>
-  <v-layout column justify-center align-center>
-    <v-flex xs12 sm8 md6>
-      <div>
-        <h1>今期のアニメ</h1>
-      </div>
-      <v-card>
-        <v-card-title class="headline">
-          Welcome to the Vuetify + Nuxt.js template
-        </v-card-title>
-        <v-card-text>
-          <p>
-            {{ animes }}
-          </p>
-          <hr class="my-3" />
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer />
-          <v-btn color="primary" nuxt to="/inspire">
-            Continue
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-flex>
+  <v-layout column>
+    <h1>今期のアニメ</h1>
+    <v-row>
+      <v-col v-for="anime in animes" :key="anime.id" class="anime_card">
+        <v-card class="mx-auto" max-width="600" :to="`detail?id=${anime.id}&search=${anime.annictId}`">
+          <v-img height="250px" :src="anime.imageUrl" />
+          <v-card-title>{{ anime.title }}</v-card-title>
+          <v-card-subtitle
+            >公式サイトURL：
+            <a :href="anime.officialSiteUrl" target="_blank" rel="noopener noreferrer">
+              {{ anime.officialSiteUrl }}
+            </a>
+          </v-card-subtitle>
+          <v-card-text>
+            <v-divider class="my-3" />
+            <p>{{ anime.media }}</p>
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
   </v-layout>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch } from '@vue/composition-api'
+import { defineComponent, ref, watchEffect } from '@vue/composition-api'
 import { Anime } from '@/entity/Anime'
 
 export default defineComponent({
@@ -34,7 +31,7 @@ export default defineComponent({
     const msg = ref<string>('こんにちは')
     const animes = ref<Anime[]>([])
 
-    watch(async () => {
+    watchEffect(async () => {
       animes.value = await context.root.$axios.$get('http://localhost:8080/annimes/2')
     })
 
@@ -45,3 +42,9 @@ export default defineComponent({
   }
 })
 </script>
+
+<style lang="scss">
+.anime_card {
+  width: 450px;
+}
+</style>
