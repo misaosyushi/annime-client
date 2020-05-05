@@ -16,7 +16,9 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title v-text="title" />
       <v-spacer />
-      <!-- TODO: ここに検索フォーム -->
+      <v-col sm="4">
+        <v-text-field outlined clearable label="検索" prepend-inner-icon="mdi-search-web" class="search_box" />
+      </v-col>
     </v-app-bar>
     <v-content>
       <v-container fluid>
@@ -56,3 +58,10 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.search_box {
+  top: 15px;
+  position: relative;
+}
+</style>

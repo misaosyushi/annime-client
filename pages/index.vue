@@ -45,7 +45,7 @@ export default defineComponent({
     const animes = ref<Anime[]>([])
 
     watchEffect(async () => {
-      animes.value = await context.root.$axios.$get('http://localhost:8080/annimes/2')
+      animes.value = await context.root.$axios.$get<Anime[]>('http://localhost:8080/annimes/2')
     })
 
     return {
