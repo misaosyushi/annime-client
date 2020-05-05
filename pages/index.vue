@@ -19,6 +19,7 @@
               </a>
             </v-card-subtitle>
             <v-card-text>
+              <!-- TODO: コンポーネント化-->
               <v-chip color="accent" outlined>
                 <v-icon v-if="anime.media === 'TV'" left>mdi-television-classic</v-icon>
                 <v-icon v-else-if="anime.media === 'OVA'" left>mdi-video</v-icon>
@@ -45,7 +46,7 @@ export default defineComponent({
     const animes = ref<Anime[]>([])
 
     watchEffect(async () => {
-      animes.value = await context.root.$axios.$get<Anime[]>('http://localhost:8080/annimes/2')
+      animes.value = await context.root.$axios.$get<Anime[]>('/annimes/2')
     })
 
     return {
@@ -56,7 +57,7 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .anime_card {
   width: 450px;
 }

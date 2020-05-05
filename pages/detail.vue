@@ -1,9 +1,52 @@
 <template>
-  <v-layout>
-    <div>
-      <h1>詳細</h1>
-      <a href="https://kaguya.love/" class="anime_link">hogehoge</a>
-    </div>
+  <v-layout column>
+    <v-card flat class="mx-auto">
+      <v-card-title>{{ anime.title }}</v-card-title>
+      <v-img :src="anime.imageUrl" />
+      <v-card-text>
+        <p>
+          公式サイトURL：
+          <a :href="anime.officialSiteUrl" target="_blank" rel="noopener noreferrer" class="anime_link">
+            {{ anime.officialSiteUrl }}
+          </a>
+        </p>
+        <p>
+          公式Twitter：<a
+            :href="`http://twitter.com/${anime.twitterUserName}`"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="anime_link"
+            >@{{ anime.twitterUserName }}</a
+          >
+        </p>
+        <!-- TODO: コンポーネント化-->
+        <p>
+          <v-chip color="accent" outlined>
+            <v-icon v-if="anime.media === 'TV'" left>mdi-television-classic</v-icon>
+            <v-icon v-else-if="anime.media === 'OVA'" left>mdi-video</v-icon>
+            <v-icon v-else-if="anime.media === '映画'" left>mdi-movie</v-icon>
+            <v-icon v-else-if="anime.media === 'Web'" left>mdi-web</v-icon>
+            <v-icon v-else-if="anime.media === 'その他'" left>mdi-television</v-icon>
+            {{ anime.media }}
+          </v-chip>
+        </p>
+      </v-card-text>
+    </v-card>
+    <v-row>
+      <v-card flat class="mx-auto">
+        <v-card-title>キャラクター / キャスト</v-card-title>
+        <v-card-text v-for="cast in casts" :key="cast.name">
+          <p class="detail_text">{{ cast.characterName }} : {{ cast.name }}</p>
+        </v-card-text>
+      </v-card>
+      <v-card flat class="mx-auto">
+        <v-card-title>エピソード</v-card-title>
+        <v-card-text v-for="episode in episodes" :key="episode.numberText">
+          <p v-if="episode.title !== undefined" class="detail_text">{{ episode.numberText }}</p>
+          <p v-if="episode.title !== undefined">{{ episode.title }}</p>
+        </v-card-text>
+      </v-card>
+    </v-row>
   </v-layout>
 </template>
 
@@ -18,13 +61,13 @@ export default defineComponent({
     const episodes = ref<Episode[]>([])
     const casts = ref<Cast[]>([])
 
-    const id = context.root.$route.query.id
-    const annictId = context.root.$route.query.search
+    const id = context.root.$route.query.id || 0
+    const annictId = context.root.$route.query.search || 0
 
     watchEffect(async () => {
-      anime.value = await context.root.$axios.$get<Anime>(`http://localhost:8080/annimes/detail/${id}`)
-      episodes.value = await context.root.$axios.$get<Episode[]>(`http://localhost:8080/episodes/${annictId}`)
-      casts.value = await context.root.$axios.$get<Cast[]>(`http://localhost:8080/casts/${annictId}`)
+      anime.value = await context.root.$axios.$get<Anime>(`/annimes/detail/${id}`)
+      episodes.value = await context.root.$axios.$get<Episode[]>(`/episodes/${annictId}`)
+      casts.value = await context.root.$axios.$get<Cast[]>(`/casts/${annictId}`)
     })
 
     return {
@@ -37,4 +80,8 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss"></style>
+<style lang="scss" scoped>
+.detail_text {
+  margin-bottom: 0px;
+}
+</style>
