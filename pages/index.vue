@@ -66,6 +66,7 @@ export default defineComponent({
     const animes = ref<Anime[]>([])
 
     watchEffect(async () => {
+      // TODO: season情報はストアにもたせて、ここではAPI呼ばないようにする
       season = await context.root.$axios.$get<Season[]>('/season')
       const filterSeason = season.filter((val) => val.seasonText === thisSeason)
       animes.value = await context.root.$axios.$get<Anime[]>(`/annimes/${filterSeason[0].id}`)

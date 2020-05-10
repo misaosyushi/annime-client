@@ -10,7 +10,7 @@
           <v-list-item-title>Top</v-list-item-title>
         </v-list-item>
 
-        <v-list-group prepend-icon="mdi-magnify">
+        <v-list-group prepend-icon="mdi-magnify" value="true">
           <template v-slot:activator>
             <v-list-item-content>
               <v-list-item-title>クール別一覧</v-list-item-title>
@@ -18,6 +18,7 @@
           </template>
 
           <v-list-item v-for="(season, i) in displaySeason" :key="i" link>
+            <v-list-item-icon />
             <v-list-item-title v-text="season.displaySeason"></v-list-item-title>
           </v-list-item>
         </v-list-group>
