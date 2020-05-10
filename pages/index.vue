@@ -43,6 +43,11 @@ import dayjs from 'dayjs'
 import { Anime, Season } from '@/entity/Anime'
 import 'dayjs/locale/ja'
 
+type DisplaySeason = {
+  id: number
+  displaySeason: string
+}
+
 export default defineComponent({
   setup(_props, context) {
     dayjs.locale('ja')
@@ -62,17 +67,38 @@ export default defineComponent({
       thisSeason = splited[0] + '-winter'
     }
 
-    const season = ref<Season[]>([])
+    let season: Season[] = []
     const animes = ref<Anime[]>([])
+    const displaySeason = ref<DisplaySeason[]>([])
 
     watchEffect(async () => {
-      season.value = await context.root.$axios.$get<Season[]>('/season')
-      const filterSeason = season.value.filter((val) => val.seasonText === thisSeason)
+      season = await context.root.$axios.$get<Season[]>('/season')
+      const filterSeason = season.filter((val) => val.seasonText === thisSeason)
+
+      season.forEach((val) => {
+        const year = val.seasonText.split('-')[0]
+        switch (val.seasonText.split('-')[1]) {
+          case 'spring':
+            displaySeason.value.push({ id: val.id, displaySeason: year + '年春' })
+            break
+          case 'summer':
+            displaySeason.value.push({ id: val.id, displaySeason: year + '年夏' })
+            break
+          case 'autumn':
+            displaySeason.value.push({ id: val.id, displaySeason: year + '年秋' })
+            break
+          case 'winter':
+            displaySeason.value.push({ id: val.id, displaySeason: year + '年冬' })
+            break
+        }
+      })
+
       animes.value = await context.root.$axios.$get<Anime[]>(`/annimes/${filterSeason[0].id}`)
     })
+
     return {
       animes,
-      season
+      displaySeason
     }
   }
 })
