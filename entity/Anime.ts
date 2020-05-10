@@ -20,3 +20,8 @@ export type Cast = {
   name: string
   characterName: string
 }
+
+export type Season = {
+  id: number
+  seasonText: string
+}

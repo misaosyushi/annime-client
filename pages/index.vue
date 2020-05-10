@@ -39,20 +39,21 @@
 
 <script lang="ts">
 import { defineComponent, ref, watchEffect } from '@vue/composition-api'
-import { Anime } from '@/entity/Anime'
+import { Anime, Season } from '@/entity/Anime'
 
 export default defineComponent({
   setup(_props, context) {
-    const msg = ref<string>('こんにちは')
+    const season = ref<Season[]>([])
     const animes = ref<Anime[]>([])
 
     watchEffect(async () => {
+      season.value = await context.root.$axios.$get<Season[]>('/season')
       animes.value = await context.root.$axios.$get<Anime[]>('/annimes/2')
     })
 
     return {
-      msg,
-      animes
+      animes,
+      season
     }
   }
 })

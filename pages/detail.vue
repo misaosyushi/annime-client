@@ -47,6 +47,9 @@
         </v-card-text>
       </v-card>
     </v-row>
+    <v-card class="mx-auto">
+      <v-btn to="/" color="accent" block><v-icon left>mdi-keyboard-backspace</v-icon>戻る</v-btn>
+    </v-card>
   </v-layout>
 </template>
 
@@ -84,4 +87,8 @@ export default defineComponent({
 .detail_text {
   margin-bottom: 0px;
 }
+
+/*.back_button {*/
+/*  margin-left: 20px;*/
+/*}*/
 </style>
