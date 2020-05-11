@@ -62,6 +62,12 @@ export default defineComponent({
 
     watchEffect(async () => {
       season = await context.root.$axios.$get<Season[]>('/season')
+      // idの降順にソート
+      season.sort((a, b) => {
+        if (a.id > b.id) return -1
+        if (a.id < b.id) return 1
+        return 0
+      })
 
       season.forEach((val) => {
         const year = val.seasonText.split('-')[0]
