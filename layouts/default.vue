@@ -35,7 +35,7 @@
       <v-toolbar-title v-text="title" />
       <v-spacer />
       <v-col sm="4">
-        <v-text-field outlined clearable label="検索" prepend-inner-icon="mdi-magnify" class="search_box" />
+        <v-text-field outlined clearable label="Coming soon..." prepend-inner-icon="mdi-magnify" class="search_box" />
       </v-col>
     </v-app-bar>
     <v-content>

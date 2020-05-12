@@ -48,6 +48,7 @@
       </v-card>
     </v-row>
     <v-card class="mx-auto">
+      <!-- TODO: 来たパスに戻るようにする -->
       <v-btn to="/" color="accent" block><v-icon left>mdi-keyboard-backspace</v-icon>戻る</v-btn>
     </v-card>
   </v-layout>
