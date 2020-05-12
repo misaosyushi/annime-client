@@ -39,44 +39,25 @@
 
 <script lang="ts">
 import { defineComponent, ref, watchEffect } from '@vue/composition-api'
-import dayjs from 'dayjs'
-import { Anime, Season } from '@/entity/Anime'
-import 'dayjs/locale/ja'
+import { Anime } from '@/entity/Anime'
 
 export default defineComponent({
   props: {
     seasonTitle: {
       type: String,
       default: ''
+    },
+    seasonId: {
+      type: Number,
+      default: 0
     }
   },
   setup(props, context) {
-    dayjs.locale('ja')
-
-    const splited = dayjs()
-      .format('YYYY-MM')
-      .split('-')
-
-    let thisSeason = ''
-    if (splited[1] === '04' || splited[1] === '05' || splited[1] === '06') {
-      thisSeason = splited[0] + '-spring'
-    } else if (splited[1] === '07' || splited[1] === '08' || splited[1] === '09') {
-      thisSeason = splited[0] + '-summer'
-    } else if (splited[1] === '10' || splited[1] === '11' || splited[1] === '12') {
-      thisSeason = splited[0] + '-autumn'
-    } else if (splited[1] === '01' || splited[1] === '02' || splited[1] === '03') {
-      thisSeason = splited[0] + '-winter'
-    }
-
-    let season: Season[] = []
     const animes = ref<Anime[]>([])
     const seasonTitle = ref<string>(props.seasonTitle)
 
     watchEffect(async () => {
-      // TODO: season情報はストアにもたせて、ここではAPI呼ばないようにする
-      season = await context.root.$axios.$get<Season[]>('/season')
-      const filterSeason = season.filter((val) => val.seasonText === thisSeason)
-      animes.value = await context.root.$axios.$get<Anime[]>(`/annimes/${filterSeason[0].id}`)
+      animes.value = await context.root.$axios.$get<Anime[]>(`/annimes/${props.seasonId}`)
     })
 
     return {
