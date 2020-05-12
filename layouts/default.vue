@@ -17,7 +17,12 @@
             </v-list-item-content>
           </template>
 
-          <v-list-item v-for="(season, i) in displaySeason" :key="i" link>
+          <!-- TODO: クエリパラメータじゃなくてストアにする -->
+          <v-list-item
+            v-for="(season, i) in displaySeason"
+            :key="i"
+            :to="`bySeason?id=${season.id}&name=${season.displaySeason}`"
+          >
             <v-list-item-icon />
             <v-list-item-title v-text="season.displaySeason"></v-list-item-title>
           </v-list-item>

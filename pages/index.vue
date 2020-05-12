@@ -1,5 +1,5 @@
 <template>
-  <animes seasonTitle="今期のアニメ" :seasonId="seasonId" />
+  <animes season-title="今期のアニメ" :season-id="seasonId" />
 </template>
 
 <script lang="ts">
