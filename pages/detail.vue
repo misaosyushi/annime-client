@@ -59,6 +59,11 @@ import { defineComponent, ref, watchEffect } from '@vue/composition-api'
 import { Anime, Episode, Cast } from '@/entity/Anime'
 
 export default defineComponent({
+  head() {
+    return {
+      title: 'アニメ詳細'
+    }
+  },
   setup(_props, context) {
     const msg = ref<string>('こんにちは')
     const anime = ref<Anime>([])
@@ -88,8 +93,4 @@ export default defineComponent({
 .detail_text {
   margin-bottom: 0px;
 }
-
-/*.back_button {*/
-/*  margin-left: 20px;*/
-/*}*/
 </style>

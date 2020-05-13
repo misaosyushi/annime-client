@@ -1,7 +1,7 @@
 {
   "name": "annime-client",
   "version": "1.0.0",
-  "description": "My dandy Nuxt.js project",
+  "description": "アニメ情報サービスのアニウェブです。クール別にアニメを検索、参照することができます。",
   "author": "misaosyushi",
   "private": true,
   "scripts": {

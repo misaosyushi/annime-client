@@ -8,6 +8,11 @@ import Animes from '@/components/Animes.vue'
 import 'dayjs/locale/ja'
 
 export default defineComponent({
+  head() {
+    return {
+      title: 'シーズン別アニメ一覧'
+    }
+  },
   components: {
     Animes
   },

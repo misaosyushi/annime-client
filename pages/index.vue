@@ -1,5 +1,5 @@
 <template>
-  <animes season-title="今期のアニメ" :season-id="seasonId" />
+  <animes :season-title="pageTitle" :season-id="seasonId" />
 </template>
 
 <script lang="ts">
@@ -9,19 +9,16 @@ import Animes from '@/components/Animes.vue'
 import 'dayjs/locale/ja'
 import { Season } from '@/entity/Anime'
 
+const PAGE_TITLE = '今期のアニメ'
+
 export default defineComponent({
-  components: {
-    Animes
-  },
   head() {
     return {
-      title: '今期のアニメ',
-      meta: [
-        // TODO: ちゃんと書く
-        // `hid` は一意の識別子として使用されます。 `vmid` は動作しないので使わないでください。
-        { hid: 'description', name: 'description', content: 'My custom description' }
-      ]
+      title: PAGE_TITLE
     }
+  },
+  components: {
+    Animes
   },
   setup(_props, context) {
     dayjs.locale('ja')
@@ -42,6 +39,7 @@ export default defineComponent({
     }
 
     let season: Season[] = []
+    const pageTitle = PAGE_TITLE
     const seasonId = ref<number>()
 
     watchEffect(async () => {
@@ -52,6 +50,7 @@ export default defineComponent({
     })
 
     return {
+      pageTitle,
       seasonId
     }
   }
