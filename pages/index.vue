@@ -13,6 +13,16 @@ export default defineComponent({
   components: {
     Animes
   },
+  head() {
+    return {
+      title: '今期のアニメ',
+      meta: [
+        // TODO: ちゃんと書く
+        // `hid` は一意の識別子として使用されます。 `vmid` は動作しないので使わないでください。
+        { hid: 'description', name: 'description', content: 'My custom description' }
+      ]
+    }
+  },
   setup(_props, context) {
     dayjs.locale('ja')
 
