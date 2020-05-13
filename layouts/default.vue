@@ -30,9 +30,11 @@
       </v-list>
     </v-navigation-drawer>
     <!-- header -->
-    <v-app-bar fixed app>
+    <v-app-bar fixed app height="65px">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title v-text="title" />
+      <v-card flat color="#f1f1f1">
+        <v-img src="/aniweb_logo.png" max-width="170" max-height="140" />
+      </v-card>
       <v-spacer />
       <v-col sm="4">
         <v-text-field outlined clearable label="Coming soon..." prepend-inner-icon="mdi-magnify" class="search_box" />
