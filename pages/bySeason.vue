@@ -10,7 +10,16 @@ import 'dayjs/locale/ja'
 export default defineComponent({
   head() {
     return {
-      title: 'シーズン別アニメ一覧'
+      title: 'クール別アニメ一覧',
+      meta: [
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'クール別のアニメ一覧です。'
+        }
+      ]
     }
   },
   components: {

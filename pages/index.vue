@@ -14,7 +14,16 @@ const PAGE_TITLE = '今期のアニメ'
 export default defineComponent({
   head() {
     return {
-      title: PAGE_TITLE
+      title: PAGE_TITLE,
+      meta: [
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        {
+          hid: 'description',
+          name: 'description',
+          content: '今期のアニメ一覧です。'
+        }
+      ]
     }
   },
   components: {

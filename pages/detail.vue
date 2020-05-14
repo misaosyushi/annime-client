@@ -61,7 +61,16 @@ import { Anime, Episode, Cast } from '@/entity/Anime'
 export default defineComponent({
   head() {
     return {
-      title: 'アニメ詳細'
+      title: 'アニメ詳細',
+      meta: [
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'アニメの詳細です。エピソード、キャスト等の情報を掲載しています。'
+        }
+      ]
     }
   },
   setup(_props, context) {
