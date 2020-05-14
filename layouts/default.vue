@@ -10,7 +10,7 @@
           <v-list-item-title>Top</v-list-item-title>
         </v-list-item>
 
-        <v-list-group prepend-icon="mdi-magnify" value="true">
+        <v-list-group prepend-icon="mdi-magnify">
           <template v-slot:activator>
             <v-list-item-content>
               <v-list-item-title>クール別一覧</v-list-item-title>
@@ -35,13 +35,14 @@
       <v-card flat color="#f1f1f1">
         <v-img src="/aniweb_logo.png" max-width="170" max-height="140" />
       </v-card>
-      <v-spacer />
-      <v-col sm="4">
-        <v-text-field outlined clearable label="Coming soon..." prepend-inner-icon="mdi-magnify" class="search_box" />
-      </v-col>
+      <!-- TODO: 検索機能 -->
+      <!--      <v-spacer />-->
+      <!--      <v-col sm="4">-->
+      <!--        <v-text-field outlined clearable label="Coming soon..." prepend-inner-icon="mdi-magnify" class="search_box" />-->
+      <!--      </v-col>-->
     </v-app-bar>
     <v-content>
-      <v-container fluid>
+      <v-container fluid :class="{ main_content: $vuetify.breakpoint.mdAndUp, '': $vuetify.breakpoint.smAndDown }">
         <nuxt />
       </v-container>
     </v-content>
@@ -108,5 +109,9 @@ export default defineComponent({
 .search_box {
   top: 15px;
   position: relative;
+}
+
+.main_content {
+  padding: 0 30px;
 }
 </style>

@@ -7,7 +7,17 @@
           <v-card :elevation="hover ? 16 : 2" class="mx-auto" max-width="600">
             <nuxt-link :to="`detail?id=${anime.id}&search=${anime.annictId}`">
               <!-- TODO: NO IMAGEの表示のさせ方をもう少し考える -->
-              <v-img height="250px" :src="anime.imageUrl" lazy-src="/no_image2.png" />
+              <v-img height="250px" :src="anime.imageUrl" lazy-src="/no_image2.png">
+                <v-expand-transition>
+                  <div
+                    v-if="hover"
+                    class="d-flex transition-fast-in-fast-out v-card--reveal display-1 white--text"
+                    style="height: 100%;"
+                  >
+                    詳細を見る
+                  </div>
+                </v-expand-transition>
+              </v-img>
             </nuxt-link>
             <nuxt-link :to="`detail?id=${anime.id}&search=${anime.annictId}`" class="anime_link">
               <v-card-title>{{ anime.title }}</v-card-title>
@@ -71,5 +81,14 @@ export default defineComponent({
 <style lang="scss" scoped>
 .anime_card {
   width: 450px;
+}
+.v-card--reveal {
+  background-color: #99a8ff;
+  align-items: center;
+  bottom: 0;
+  justify-content: center;
+  opacity: 0.4;
+  position: absolute;
+  width: 100%;
 }
 </style>
