@@ -33,13 +33,13 @@
       </v-card-text>
     </v-card>
     <v-row>
-      <v-card flat class="mx-auto">
+      <v-card flat :class="{ 'mx-auto': $vuetify.breakpoint.smAndUp, '': $vuetify.breakpoint.xsOnly }">
         <v-card-title>キャラクター / キャスト</v-card-title>
         <v-card-text v-for="cast in casts" :key="cast.name">
           <p class="detail_text">{{ cast.characterName }} : {{ cast.name }}</p>
         </v-card-text>
       </v-card>
-      <v-card flat class="mx-auto">
+      <v-card flat :class="{ 'mx-auto': $vuetify.breakpoint.smAndUp, '': $vuetify.breakpoint.xsOnly }">
         <v-card-title>エピソード</v-card-title>
         <v-card-text v-for="episode in episodes" :key="episode.numberText">
           <p v-if="episode.title !== undefined" class="detail_text">{{ episode.numberText }}</p>
@@ -47,10 +47,10 @@
         </v-card-text>
       </v-card>
     </v-row>
-    <v-card class="mx-auto">
-      <!-- TODO: 来たパスに戻るようにする -->
-      <v-btn to="/" color="accent" block><v-icon left>mdi-keyboard-backspace</v-icon>戻る</v-btn>
-    </v-card>
+    <!--    <v-card class="mx-auto">-->
+    <!--      &lt;!&ndash; TODO: 来たパスに戻るようにする &ndash;&gt;-->
+    <!--      <v-btn to="/" color="accent" block><v-icon left>mdi-keyboard-backspace</v-icon>戻る</v-btn>-->
+    <!--    </v-card>-->
   </v-layout>
 </template>
 

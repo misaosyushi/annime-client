@@ -114,5 +114,6 @@ export default defineComponent({
 
 .main_content {
   padding: 10px 35px;
+  max-width: 1800px;
 }
 </style>
