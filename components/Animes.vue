@@ -7,7 +7,7 @@
           <v-card :elevation="hover ? 16 : 2" class="mx-auto" max-width="600">
             <nuxt-link :to="`detail?id=${anime.id}&search=${anime.annictId}`">
               <!-- TODO: NO IMAGEの表示のさせ方をもう少し考える -->
-              <v-img height="250px" :src="anime.imageUrl" lazy-src="/no_image2.png">
+              <v-img v-if="$vuetify.breakpoint.smAndUp" height="250px" :src="anime.imageUrl" lazy-src="/no_image2.png">
                 <v-expand-transition>
                   <div
                     v-if="hover"
@@ -18,6 +18,7 @@
                   </div>
                 </v-expand-transition>
               </v-img>
+              <v-img v-else :src="anime.imageUrl" lazy-src="/no_image2.png" />
             </nuxt-link>
             <nuxt-link :to="`detail?id=${anime.id}&search=${anime.annictId}`" class="anime_link">
               <v-card-title>{{ anime.title }}</v-card-title>

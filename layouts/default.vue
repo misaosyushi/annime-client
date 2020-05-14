@@ -33,7 +33,8 @@
     <v-app-bar fixed app height="65px">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-card flat color="#f1f1f1">
-        <v-img src="/aniweb_logo.png" max-width="170" max-height="140" />
+        <v-img v-if="$vuetify.breakpoint.smAndUp" src="/aniweb_logo.png" max-width="170" max-height="140" />
+        <v-img v-else src="/aniweb_logo.png" max-width="110" max-height="80" />
       </v-card>
       <!-- TODO: 検索機能 -->
       <!--      <v-spacer />-->
@@ -112,6 +113,6 @@ export default defineComponent({
 }
 
 .main_content {
-  padding: 0 30px;
+  padding: 10px 35px;
 }
 </style>
