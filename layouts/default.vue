@@ -17,7 +17,6 @@
             </v-list-item-content>
           </template>
 
-          <!-- TODO: クエリパラメータじゃなくてストアにする -->
           <v-list-item
             v-for="(season, i) in displaySeason"
             :key="i"
