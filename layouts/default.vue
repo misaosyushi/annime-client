@@ -21,10 +21,11 @@
           <v-list-item
             v-for="(season, i) in displaySeason"
             :key="i"
-            :to="`bySeason?id=${season.id}&name=${season.displaySeason}`"
+            :to="`/bySeason/${season.id}`"
+            @click="setDisplaySeason(season.displaySeason)"
           >
             <v-list-item-icon />
-            <v-list-item-title v-text="season.displaySeason"></v-list-item-title>
+            <v-list-item-title v-text="season.displaySeason" />
           </v-list-item>
         </v-list-group>
       </v-list>
@@ -97,10 +98,15 @@ export default defineComponent({
       })
     })
 
+    function setDisplaySeason(displaySeason: string) {
+      context.root.$nuxt.$store.commit('season/setDisplaySeason', displaySeason)
+    }
+
     return {
       title,
       drawer,
-      displaySeason
+      displaySeason,
+      setDisplaySeason
     }
   }
 })

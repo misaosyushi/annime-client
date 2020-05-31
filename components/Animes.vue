@@ -1,11 +1,11 @@
 <template>
   <v-layout column>
-    <h1>{{ seasonTitle }}</h1>
+    <h1>{{ title }}</h1>
     <v-row>
       <v-col v-for="anime in animes" :key="anime.id" class="anime_card">
         <v-hover v-slot:default="{ hover }">
           <v-card :elevation="hover ? 16 : 2" class="mx-auto" max-width="600">
-            <nuxt-link :to="`detail?id=${anime.id}&search=${anime.annictId}`">
+            <nuxt-link :to="`/detail?id=${anime.id}&search=${anime.annictId}`">
               <!-- TODO: NO IMAGEの表示のさせ方をもう少し考える -->
               <v-img v-if="$vuetify.breakpoint.smAndUp" height="250px" :src="anime.imageUrl" lazy-src="/no_image2.png">
                 <v-expand-transition>
@@ -20,7 +20,7 @@
               </v-img>
               <v-img v-else :src="anime.imageUrl" lazy-src="/no_image2.png" />
             </nuxt-link>
-            <nuxt-link :to="`detail?id=${anime.id}&search=${anime.annictId}`" class="anime_link">
+            <nuxt-link :to="`/detail?id=${anime.id}&search=${anime.annictId}`" class="anime_link">
               <v-card-title>{{ anime.title }}</v-card-title>
             </nuxt-link>
             <v-divider />
@@ -65,7 +65,7 @@ export default defineComponent({
   },
   setup(props, context) {
     const animes = ref<Anime[]>([])
-    const seasonTitle = ref<string>(props.seasonTitle)
+    const title = ref<string>(props.seasonTitle)
 
     watchEffect(async () => {
       animes.value = await context.root.$axios.$get<Anime[]>(`/annimes/${props.seasonId}`)
@@ -73,7 +73,7 @@ export default defineComponent({
 
     return {
       animes,
-      seasonTitle
+      title
     }
   }
 })

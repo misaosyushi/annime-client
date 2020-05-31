@@ -6,7 +6,7 @@ console.info('API base url:', process.env.NUXT_ENV_BASE_URL)
 export default {
   mode: 'spa',
   env: {
-    baseUrl: process.env.BASE_URL || 'http://localhost:8080'
+    baseUrl: process.env.NUXT_ENV_BASE_URL || 'http://localhost:8080'
   },
   /*
    ** Headers of the page
