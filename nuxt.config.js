@@ -19,7 +19,8 @@ export default {
         name: 'description',
         content: process.env.npm_package_description || ''
       },
-      { hid: 'og:title', property: 'og:title', content: 'アニウェブ' }
+      { hid: 'og:title', property: 'og:title', content: 'アニウェブ' },
+      { hid: 'og:image', property: 'og:image', content: '/aniweb_ogp.png' }
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.png' }]
   },

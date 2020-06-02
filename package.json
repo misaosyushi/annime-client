@@ -1,7 +1,7 @@
 {
   "name": "aniweb",
   "version": "1.0.0",
-  "description": "アニメ情報サービスのアニウェブです。クール別にアニメを検索、参照することができます。",
+  "description": "アニメ情報サービスのアニウェブです。クール別にアニメを検索、参照することができます。素敵なアニメライフにご活用ください！",
   "author": "misaosyushi",
   "private": true,
   "scripts": {
