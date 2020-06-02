@@ -23,7 +23,8 @@ export default defineComponent({
           name: 'description',
           content: '今期のアニメ一覧です。'
         }
-      ]
+      ],
+      link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.png' }]
     }
   },
   components: {

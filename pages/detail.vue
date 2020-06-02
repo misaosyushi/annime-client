@@ -70,7 +70,8 @@ export default defineComponent({
           name: 'description',
           content: 'アニメの詳細です。エピソード、キャスト等の情報を掲載しています。'
         }
-      ]
+      ],
+      link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.png' }]
     }
   },
   setup(_props, context) {

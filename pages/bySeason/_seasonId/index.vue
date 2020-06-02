@@ -19,7 +19,8 @@ export default defineComponent({
           name: 'description',
           content: 'クール別のアニメ一覧です。'
         }
-      ]
+      ],
+      link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.png' }]
     }
   },
   components: {
