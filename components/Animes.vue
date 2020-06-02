@@ -68,7 +68,9 @@ export default defineComponent({
     const title = ref<string>(props.seasonTitle)
 
     watchEffect(async () => {
-      animes.value = await context.root.$axios.$get<Anime[]>(`/annimes/${props.seasonId}`)
+      if (props.seasonId !== 0) {
+        animes.value = await context.root.$axios.$get<Anime[]>(`/annimes/${props.seasonId}`)
+      }
     })
 
     return {

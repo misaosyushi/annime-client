@@ -77,6 +77,7 @@ export default defineComponent({
         if (a.id < b.id) return 1
         return 0
       })
+      context.root.$nuxt.$store.commit('season/setSeason', season)
 
       season.forEach((val) => {
         const year = val.seasonText.split('-')[0]
