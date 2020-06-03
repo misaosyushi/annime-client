@@ -83,16 +83,16 @@ export default defineComponent({
         const year = val.seasonText.split('-')[0]
         switch (val.seasonText.split('-')[1]) {
           case 'spring':
-            displaySeason.value.push({ id: val.id, displaySeason: year + '年春' })
+            displaySeason.value.push({ id: val.id, displaySeason: year + '年 春' })
             break
           case 'summer':
-            displaySeason.value.push({ id: val.id, displaySeason: year + '年夏' })
+            displaySeason.value.push({ id: val.id, displaySeason: year + '年 夏' })
             break
           case 'autumn':
-            displaySeason.value.push({ id: val.id, displaySeason: year + '年秋' })
+            displaySeason.value.push({ id: val.id, displaySeason: year + '年 秋' })
             break
           case 'winter':
-            displaySeason.value.push({ id: val.id, displaySeason: year + '年冬' })
+            displaySeason.value.push({ id: val.id, displaySeason: year + '年 冬' })
             break
         }
       })
