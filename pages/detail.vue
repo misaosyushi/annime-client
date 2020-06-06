@@ -1,16 +1,16 @@
 <template>
   <v-layout column>
     <v-card flat class="mx-auto">
-      <v-card-title>{{ anime.title }}</v-card-title>
+      <v-card-title class="my_font">{{ anime.title }}</v-card-title>
       <v-img :src="anime.imageUrl" />
       <v-card-text>
-        <p>
+        <p class="my_font">
           公式サイトURL：
           <a :href="anime.officialSiteUrl" target="_blank" rel="noopener noreferrer" class="anime_link">
             {{ anime.officialSiteUrl }}
           </a>
         </p>
-        <p>
+        <p class="my_font">
           公式Twitter：<a
             :href="`http://twitter.com/${anime.twitterUserName}`"
             target="_blank"
@@ -21,7 +21,7 @@
         </p>
         <!-- TODO: コンポーネント化-->
         <p>
-          <v-chip color="accent" outlined>
+          <v-chip color="accent" outlined class="my_font">
             <v-icon v-if="anime.media === 'TV'" left>mdi-television-classic</v-icon>
             <v-icon v-else-if="anime.media === 'OVA'" left>mdi-video</v-icon>
             <v-icon v-else-if="anime.media === '映画'" left>mdi-movie</v-icon>
@@ -34,16 +34,16 @@
     </v-card>
     <v-row>
       <v-card flat :class="{ 'mx-auto': $vuetify.breakpoint.smAndUp, '': $vuetify.breakpoint.xsOnly }">
-        <v-card-title>キャラクター / キャスト</v-card-title>
+        <v-card-title class="my_font">キャラクター / キャスト</v-card-title>
         <v-card-text v-for="cast in casts" :key="cast.name">
-          <p class="detail_text">{{ cast.characterName }} : {{ cast.name }}</p>
+          <p class="detail_text my_font">{{ cast.characterName }} : {{ cast.name }}</p>
         </v-card-text>
       </v-card>
       <v-card flat :class="{ 'mx-auto': $vuetify.breakpoint.smAndUp, '': $vuetify.breakpoint.xsOnly }">
-        <v-card-title>エピソード</v-card-title>
+        <v-card-title class="my_font">エピソード</v-card-title>
         <v-card-text v-for="episode in episodes" :key="episode.numberText">
-          <p v-if="episode.title !== undefined" class="detail_text">{{ episode.numberText }}</p>
-          <p v-if="episode.title !== undefined">{{ episode.title }}</p>
+          <p v-if="episode.title !== undefined" class="detail_text my_font">{{ episode.numberText }}</p>
+          <p v-if="episode.title !== undefined" class="my_font">{{ episode.title }}</p>
         </v-card-text>
       </v-card>
     </v-row>

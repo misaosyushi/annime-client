@@ -3,3 +3,12 @@
     color: #ff667d;
   }
 }
+
+@font-face {
+  font-family: 'MyFont';
+  src: url('../font/MPLUSRounded1c-Regular.ttf') format("truetype");
+}
+
+.my_font {
+  font-family: MyFont;
+}

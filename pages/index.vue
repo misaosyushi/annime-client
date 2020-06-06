@@ -34,7 +34,7 @@ export default defineComponent({
 
     const season: Season[] = context.root.$store.state.season.season
     context.root.$nuxt.$store.commit('season/filterSeasonId', season)
-    seasonId.value = context.root.$store.state.season.seasonId
+    seasonId.value = context.root.$store.state.season.thisSeasonId
 
     return {
       pageTitle,

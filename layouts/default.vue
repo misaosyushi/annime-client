@@ -7,13 +7,13 @@
           <v-list-item-icon>
             <v-icon>mdi-apps</v-icon>
           </v-list-item-icon>
-          <v-list-item-title>Top</v-list-item-title>
+          <v-list-item-title class="my_font">Top</v-list-item-title>
         </v-list-item>
 
         <v-list-group prepend-icon="mdi-magnify">
           <template v-slot:activator>
             <v-list-item-content>
-              <v-list-item-title>クール別一覧</v-list-item-title>
+              <v-list-item-title class="my_font">クール別一覧</v-list-item-title>
             </v-list-item-content>
           </template>
 
@@ -24,7 +24,7 @@
             @click="setDisplaySeason(season.displaySeason)"
           >
             <v-list-item-icon />
-            <v-list-item-title v-text="season.displaySeason" />
+            <v-list-item-title v-text="season.displaySeason" class="my_font" />
           </v-list-item>
         </v-list-group>
       </v-list>
@@ -48,7 +48,7 @@
       </v-container>
     </v-content>
     <v-footer :fixed="false" app>
-      <span>&copy; misaosyushi</span>
+      <span class="my_font">&copy; misaosyushi</span>
     </v-footer>
   </v-app>
 </template>

@@ -1,6 +1,6 @@
 <template>
   <v-layout column>
-    <h1>{{ title }}</h1>
+    <h1 class="my_font">{{ title }}</h1>
     <v-row>
       <v-col v-for="anime in animes" :key="anime.id" class="anime_card">
         <v-hover v-slot:default="{ hover }">
@@ -14,23 +14,23 @@
                     class="d-flex transition-fast-in-fast-out v-card--reveal display-1 white--text"
                     style="height: 100%;"
                   >
-                    詳細を見る
+                    <span class="my_font">詳細を見る</span>
                   </div>
                 </v-expand-transition>
               </v-img>
               <v-img v-else :src="anime.imageUrl" lazy-src="/no_image2.png" />
             </nuxt-link>
             <nuxt-link :to="`/detail?id=${anime.id}&search=${anime.annictId}`" class="anime_link">
-              <v-card-title>{{ anime.title }}</v-card-title>
+              <v-card-title class="my_font">{{ anime.title }}</v-card-title>
             </nuxt-link>
             <v-divider />
-            <v-card-subtitle
+            <v-card-subtitle class="my_font"
               >公式サイトURL：
               <a :href="anime.officialSiteUrl" target="_blank" rel="noopener noreferrer" class="anime_link">
                 {{ anime.officialSiteUrl }}
               </a>
             </v-card-subtitle>
-            <v-card-text>
+            <v-card-text class="my_font">
               <!-- TODO: コンポーネント化-->
               <v-chip color="accent" outlined>
                 <v-icon v-if="anime.media === 'TV'" left>mdi-television-classic</v-icon>
