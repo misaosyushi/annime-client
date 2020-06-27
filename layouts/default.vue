@@ -1,7 +1,25 @@
 <template>
   <v-app dark>
+    <!-- header -->
+    <v-card v-if="$vuetify.breakpoint.smAndUp" flat tile class="header">
+      <v-app-bar height="65px" dark fixed flat color="#4d4d4d">
+        <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+        <v-img src="/aniweb_logo2.png" max-width="170" max-height="140" />
+        <!-- TODO: 検索機能 -->
+        <!--      <v-spacer />-->
+        <!--      <v-col sm="4">-->
+        <!--        <v-text-field outlined clearable label="Coming soon..." prepend-inner-icon="mdi-magnify" class="search_box" />-->
+        <!--      </v-col>-->
+      </v-app-bar>
+    </v-card>
+    <v-card v-else flat tile>
+      <v-app-bar height="65px" dark fixed flat color="#4d4d4d">
+        <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+        <v-img src="/aniweb_logo2.png" max-width="110" max-height="80" />
+      </v-app-bar>
+    </v-card>
     <!-- side bar -->
-    <v-navigation-drawer v-model="drawer" app>
+    <v-navigation-drawer v-model="drawer" app floating class="sidebar">
       <v-list>
         <v-list-item to="/">
           <v-list-item-icon>
@@ -29,19 +47,6 @@
         </v-list-group>
       </v-list>
     </v-navigation-drawer>
-    <!-- header -->
-    <v-app-bar fixed app height="65px">
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-card flat color="#f1f1f1">
-        <v-img v-if="$vuetify.breakpoint.smAndUp" src="/aniweb_logo.png" max-width="170" max-height="140" />
-        <v-img v-else src="/aniweb_logo.png" max-width="110" max-height="80" />
-      </v-card>
-      <!-- TODO: 検索機能 -->
-      <!--      <v-spacer />-->
-      <!--      <v-col sm="4">-->
-      <!--        <v-text-field outlined clearable label="Coming soon..." prepend-inner-icon="mdi-magnify" class="search_box" />-->
-      <!--      </v-col>-->
-    </v-app-bar>
     <v-content>
       <v-container fluid :class="{ main_content: $vuetify.breakpoint.mdAndUp, '': $vuetify.breakpoint.smAndDown }">
         <nuxt />
@@ -121,5 +126,13 @@ export default defineComponent({
 .main_content {
   padding: 10px 35px;
   max-width: 1800px;
+}
+
+.header {
+  margin-bottom: 75px;
+}
+
+.sidebar {
+  margin-top: 65px;
 }
 </style>

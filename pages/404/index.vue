@@ -7,14 +7,14 @@
   </v-app>
 </template>
 
-<script>
-import { defineComponent, onMounted } from '@vue/composition-api'
+<script lang="ts">
+import { defineComponent, onMounted, SetupContext } from '@vue/composition-api'
 
 export default defineComponent({
-  setup() {
+  setup(_props, context: SetupContext) {
     onMounted(() => {
-      const pathName = window.location.pathname
-      this.$nuxt.$router.push('/redirect?p=' + encodeURI(pathName))
+      const pathName: string = window.location.pathname
+      context.root.$nuxt.$router.push('/redirect?p=' + encodeURI(pathName))
     })
   }
 })
