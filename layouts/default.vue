@@ -19,7 +19,12 @@
       </v-app-bar>
     </v-card>
     <!-- side bar -->
-    <v-navigation-drawer v-model="drawer" app floating class="sidebar">
+    <v-navigation-drawer
+      v-model="drawer"
+      app
+      floating
+      :class="{ sidebar: $vuetify.breakpoint.lgAndUp, '': $vuetify.breakpoint.mdAndDown }"
+    >
       <v-list>
         <v-list-item to="/">
           <v-list-item-icon>
@@ -52,8 +57,9 @@
         <nuxt />
       </v-container>
     </v-content>
-    <v-footer :fixed="false" app>
-      <span class="my_font">&copy; misaosyushi</span>
+    <v-footer color="accent">
+      <v-spacer />
+      <span class="my_font footer__font">&copy; misaosyushi</span>
     </v-footer>
   </v-app>
 </template>
@@ -134,5 +140,13 @@ export default defineComponent({
 
 .sidebar {
   margin-top: 65px;
+}
+
+.footer {
+  margin-top: 30px;
+  &__font {
+    color: #ffffff;
+    font-weight: bold;
+  }
 }
 </style>
