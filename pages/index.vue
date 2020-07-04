@@ -32,9 +32,12 @@ export default defineComponent({
     const pageTitle = PAGE_TITLE
     const seasonId = ref<number>()
 
-    const season: Season[] = context.root.$store.state.season.season
-    context.root.$nuxt.$store.commit('season/filterSeasonId', season)
-    seasonId.value = context.root.$store.state.season.thisSeasonId
+    // TODO: default.vueでシーズン情報をstoreにいれてからじゃないと取れないので一時的にsetTimeoutしてる
+    setTimeout(() => {
+      const season: Season[] = context.root.$store.state.season.season
+      context.root.$nuxt.$store.commit('season/filterSeasonId', season)
+      seasonId.value = context.root.$store.state.season.thisSeasonId
+    }, 1000)
 
     return {
       pageTitle,
