@@ -87,8 +87,5 @@ export default {
      */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     extend(config, ctx) {}
-  },
-  generate: {
-    routes: ['404']
   }
 }
