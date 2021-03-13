@@ -30,5 +30,6 @@ export type Cast = {
 
 export type Season = {
   id: number
-  seasonText: string
+  seasonName: string
+  seasonNameText: string
 }

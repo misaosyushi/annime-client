@@ -40,14 +40,9 @@
             </v-list-item-content>
           </template>
 
-          <v-list-item
-            v-for="(season, i) in displaySeason"
-            :key="i"
-            :to="`/bySeason/${season.seasonText}`"
-            @click="setDisplaySeason(season.displaySeason)"
-          >
+          <v-list-item v-for="(season, i) in seasonList" :key="i" :to="`/bySeason/${season.seasonName}`">
             <v-list-item-icon />
-            <v-list-item-title class="my_font" v-text="season.displaySeason" />
+            <v-list-item-title class="my_font" v-text="season.seasonNameText" />
           </v-list-item>
         </v-list-group>
       </v-list>
@@ -65,61 +60,32 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watchEffect } from '@vue/composition-api'
+import { defineComponent, ref, onMounted } from '@vue/composition-api'
 import { Season } from '@/entity/Anime'
-
-type DisplaySeason = {
-  id: number
-  displaySeason: string
-}
 
 export default defineComponent({
   setup(_props, context) {
     const title = ref<string>('アニウェブ')
     const drawer = ref<boolean>(false)
-    const displaySeason = ref<DisplaySeason[]>([])
-    let season: Season[] = []
+    const seasonList = ref<Season[]>([])
 
-    watchEffect(async () => {
-      season = await context.root.$axios.$get<Season[]>(
+    onMounted(async () => {
+      seasonList.value = await context.root.$axios.$get<Season[]>(
         'https://9n0j8g7loh.execute-api.ap-northeast-1.amazonaws.com/prod/season'
       )
       // idの降順にソート
-      season.sort((a, b) => {
+      seasonList.value.sort((a, b) => {
         if (a.id > b.id) return -1
         if (a.id < b.id) return 1
         return 0
       })
-      context.root.$nuxt.$store.commit('season/setSeason', season)
-
-      season.forEach((val) => {
-        const year = val.seasonText.split('-')[0]
-        switch (val.seasonText.split('-')[1]) {
-          case 'spring':
-            displaySeason.value.push({ id: val.id, displaySeason: year + '年 春' })
-            break
-          case 'summer':
-            displaySeason.value.push({ id: val.id, displaySeason: year + '年 夏' })
-            break
-          case 'autumn':
-            displaySeason.value.push({ id: val.id, displaySeason: year + '年 秋' })
-            break
-          case 'winter':
-            displaySeason.value.push({ id: val.id, displaySeason: year + '年 冬' })
-            break
-        }
-      })
+      context.root.$nuxt.$store.commit('season/setSeason', seasonList)
     })
-
-    function setDisplaySeason(displaySeason: string) {
-      context.root.$nuxt.$store.commit('season/setDisplaySeason', displaySeason)
-    }
 
     return {
       title,
       drawer,
-      displaySeason,
-      setDisplaySeason
+      seasonList
     }
   }
 })
