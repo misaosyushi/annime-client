@@ -1,6 +1,6 @@
 # annime-client
 
-> My dandy Nuxt.js project
+アニウェブのフロント
 
 ## Build Setup
 
@@ -20,3 +20,13 @@ $ npm run generate
 ```
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+
+## Firebaseの操作
+
+```bash
+# 現在のプロジェクト確認
+$ firebase projects:list
+
+# デプロイ
+$ firebase deploy --only hosting
+```
