@@ -2,7 +2,7 @@
   <v-layout column>
     <v-card flat class="mx-auto">
       <v-card-title class="my_font">{{ anime.title }}</v-card-title>
-      <v-img :src="anime.imageUrl" />
+      <v-img :src="anime.images.recommendedUrl" />
       <v-card-text>
         <p class="my_font">
           公式サイトURL：
@@ -12,22 +12,22 @@
         </p>
         <p class="my_font">
           公式Twitter：<a
-            :href="`http://twitter.com/${anime.twitterUserName}`"
+            :href="`http://twitter.com/${anime.twitterUsername}`"
             target="_blank"
             rel="noopener noreferrer"
             class="anime_link"
-            >@{{ anime.twitterUserName }}</a
+            >@{{ anime.twitterUsername }}</a
           >
         </p>
         <!-- TODO: コンポーネント化-->
         <p>
           <v-chip color="accent" outlined class="my_font">
-            <v-icon v-if="anime.media === 'TV'" left>mdi-television-classic</v-icon>
-            <v-icon v-else-if="anime.media === 'OVA'" left>mdi-video</v-icon>
-            <v-icon v-else-if="anime.media === '映画'" left>mdi-movie</v-icon>
-            <v-icon v-else-if="anime.media === 'Web'" left>mdi-web</v-icon>
-            <v-icon v-else-if="anime.media === 'その他'" left>mdi-television</v-icon>
-            {{ anime.media }}
+            <v-icon v-if="anime.mediaText === 'TV'" left>mdi-television-classic</v-icon>
+            <v-icon v-else-if="anime.mediaText === 'OVA'" left>mdi-video</v-icon>
+            <v-icon v-else-if="anime.mediaText === '映画'" left>mdi-movie</v-icon>
+            <v-icon v-else-if="anime.mediaText === 'Web'" left>mdi-web</v-icon>
+            <v-icon v-else-if="anime.mediaText === 'その他'" left>mdi-television</v-icon>
+            {{ anime.mediaText }}
           </v-chip>
         </p>
       </v-card-text>
@@ -36,7 +36,7 @@
       <v-card flat :class="{ 'mx-auto': $vuetify.breakpoint.smAndUp, '': $vuetify.breakpoint.xsOnly }">
         <v-card-title class="my_font">キャラクター / キャスト</v-card-title>
         <v-card-text v-for="cast in casts" :key="cast.name">
-          <p class="detail_text my_font">{{ cast.characterName }} : {{ cast.name }}</p>
+          <p class="detail_text my_font">{{ cast.character.name }} : {{ cast.name }}</p>
         </v-card-text>
       </v-card>
       <v-card flat :class="{ 'mx-auto': $vuetify.breakpoint.smAndUp, '': $vuetify.breakpoint.xsOnly }">
@@ -55,8 +55,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watchEffect } from '@vue/composition-api'
-import { Anime, Episode, Cast } from '@/entity/Anime'
+import { defineComponent } from '@vue/composition-api'
+import { Animes, Episodes, Casts } from '@/entity/Anime'
 
 export default defineComponent({
   head() {
@@ -74,26 +74,35 @@ export default defineComponent({
       link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.png' }]
     }
   },
-  setup(_props, context) {
-    const msg = ref<string>('こんにちは')
-    const anime = ref<Anime>([])
-    const episodes = ref<Episode[]>([])
-    const casts = ref<Cast[]>([])
-
-    const id = context.root.$route.query.id || 0
-    const annictId = context.root.$route.query.search || 0
-
-    watchEffect(async () => {
-      anime.value = await context.root.$axios.$get<Anime>(`/annimes/detail/${id}`)
-      episodes.value = await context.root.$axios.$get<Episode[]>(`/episodes/${annictId}`)
-      casts.value = await context.root.$axios.$get<Cast[]>(`/casts/${annictId}`)
-    })
+  async asyncData({ $axios, query }): Promise<any> {
+    const id = query.id || 0
+    const [animeRes, episodesRes, castsRes] = await Promise.all([
+      $axios.$get<Animes>(`/works`, {
+        params: {
+          access_token: process.env.NUXT_ENV_ACCESS_TOKEN,
+          filter_ids: id
+        }
+      }),
+      $axios.$get<Episodes>(`/episodes`, {
+        params: {
+          access_token: process.env.NUXT_ENV_ACCESS_TOKEN,
+          filter_work_id: id,
+          sort_sort_number: 'asc'
+        }
+      }),
+      $axios.$get<Casts>(`/casts`, {
+        params: {
+          access_token: process.env.NUXT_ENV_ACCESS_TOKEN,
+          filter_work_id: id,
+          sort_sort_number: 'asc'
+        }
+      })
+    ])
 
     return {
-      msg,
-      anime,
-      episodes,
-      casts
+      anime: animeRes.works[0],
+      episodes: episodesRes.episodes,
+      casts: castsRes.casts
     }
   }
 })

@@ -16,16 +16,26 @@ export type Anime = {
   }
 }
 
+export type Episodes = {
+  episodes: Episode[]
+}
+
 export type Episode = {
-  annictId: number
+  id: number
   numberText: string
   title: string
 }
 
+export type Casts = {
+  casts: Cast[]
+}
+
 export type Cast = {
-  annictId: number
+  id: number
   name: string
-  characterName: string
+  character: {
+    name: string
+  }
 }
 
 export type Season = {
