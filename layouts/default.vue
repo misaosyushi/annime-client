@@ -42,7 +42,11 @@
 
           <v-list-item v-for="(season, i) in seasonList" :key="i" :to="`/bySeason/${season.seasonName}`">
             <v-list-item-icon />
-            <v-list-item-title class="my_font" v-text="season.seasonNameText" />
+            <v-list-item-title
+              class="my_font"
+              @click="setSeasonNameText(season.seasonNameText)"
+              v-text="season.seasonNameText"
+            />
           </v-list-item>
         </v-list-group>
       </v-list>
@@ -60,11 +64,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted } from '@vue/composition-api'
+import { defineComponent, ref, onMounted, SetupContext } from '@vue/composition-api'
 import { Season } from '@/entity/Anime'
 
 export default defineComponent({
-  setup(_props, context) {
+  setup(_props, context: SetupContext) {
     const title = ref<string>('アニウェブ')
     const drawer = ref<boolean>(false)
     const seasonList = ref<Season[]>([])
@@ -79,13 +83,17 @@ export default defineComponent({
         if (a.id < b.id) return 1
         return 0
       })
-      context.root.$nuxt.$store.commit('season/setSeason', seasonList)
     })
+
+    const setSeasonNameText = (seasonName: string) => {
+      context.root.$nuxt.$store.commit('season/setSeasonNameText', seasonName)
+    }
 
     return {
       title,
       drawer,
-      seasonList
+      seasonList,
+      setSeasonNameText
     }
   }
 })

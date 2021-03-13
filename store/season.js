@@ -1,12 +1,9 @@
 export const state = () => ({
-  displaySeason: null,
-  season: null,
-  thisSeasonId: null,
-  thisSeason: null
+  seasonNameText: null
 })
 
 export const mutations = {
-  setSeason(state, value) {
-    state.season = value
+  setSeasonNameText(state, value) {
+    state.seasonNameText = value
   }
 }

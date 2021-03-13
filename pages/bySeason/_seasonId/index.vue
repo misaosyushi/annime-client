@@ -1,9 +1,9 @@
 <template>
-  <animes :season-title="name + 'のアニメ'" :season-id="Number($route.params.seasonId)" />
+  <animes :season-title="seasonName + 'のアニメ'" :target-season="$route.params.seasonId" />
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from '@vue/composition-api'
+import { defineComponent, SetupContext } from '@vue/composition-api'
 import Animes from '@/components/Animes.vue'
 import 'dayjs/locale/ja'
 
@@ -26,11 +26,11 @@ export default defineComponent({
   components: {
     Animes
   },
-  setup(_props, context) {
-    const name = ref<string>(context.root.$store.state.season.displaySeason)
+  setup(_props, context: SetupContext) {
+    const seasonName = context.root.$store.state.season.seasonNameText
 
     return {
-      name
+      seasonName
     }
   }
 })

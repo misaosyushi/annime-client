@@ -54,7 +54,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted } from '@vue/composition-api'
+import { defineComponent, ref, onMounted, SetupContext } from '@vue/composition-api'
 import { Anime, Animes } from '@/entity/Anime'
 
 export default defineComponent({
@@ -68,12 +68,12 @@ export default defineComponent({
       default: ''
     }
   },
-  setup(props, context) {
+  setup(props, context: SetupContext) {
     const animes = ref<Anime[]>([])
     const title = ref<string>(props.seasonTitle)
 
     onMounted(async () => {
-      if (props.seasonId !== '') {
+      if (props.targetSeason !== '') {
         const res = await context.root.$axios.$get<Animes>(`/works`, {
           params: {
             access_token: process.env.NUXT_ENV_ACCESS_TOKEN,
