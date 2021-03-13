@@ -40,13 +40,14 @@
             </v-list-item-content>
           </template>
 
-          <v-list-item v-for="(season, i) in seasonList" :key="i" :to="`/bySeason/${season.seasonName}`">
+          <v-list-item
+            v-for="(season, i) in seasonList"
+            :key="i"
+            :to="`/bySeason/${season.seasonName}`"
+            @click="setSeasonNameText(season.seasonNameText)"
+          >
             <v-list-item-icon />
-            <v-list-item-title
-              class="my_font"
-              @click="setSeasonNameText(season.seasonNameText)"
-              v-text="season.seasonNameText"
-            />
+            <v-list-item-title class="my_font" v-text="season.seasonNameText" />
           </v-list-item>
         </v-list-group>
       </v-list>
