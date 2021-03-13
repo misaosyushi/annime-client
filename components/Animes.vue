@@ -63,9 +63,9 @@ export default defineComponent({
       type: String,
       default: ''
     },
-    seasonId: {
+    targetSeason: {
       type: String,
-      default: 0
+      default: ''
     }
   },
   setup(props, context) {
@@ -74,11 +74,10 @@ export default defineComponent({
 
     onMounted(async () => {
       if (props.seasonId !== '') {
-        // animes.value = await context.root.$axios.$get<Anime[]>(`/works/${props.seasonId}`)
         const res = await context.root.$axios.$get<Animes>(`/works`, {
           params: {
             access_token: process.env.NUXT_ENV_ACCESS_TOKEN,
-            filter_season: '2021-winter',
+            filter_season: props.targetSeason,
             sort_watchers_count: 'desc'
           }
         })

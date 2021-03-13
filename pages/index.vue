@@ -1,11 +1,12 @@
 <template>
-  <animes :season-title="pageTitle" :season-id="thisSeason" />
+  <animes :season-title="pageTitle" :target-season="thisSeason" />
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from '@vue/composition-api'
+import { defineComponent } from '@vue/composition-api'
+import dayjs from 'dayjs'
+import ja from 'dayjs/locale/ja'
 import Animes from '@/components/Animes.vue'
-import { Season } from '@/entity/Anime'
 
 const PAGE_TITLE = '今期のアニメ'
 
@@ -28,20 +29,24 @@ export default defineComponent({
   components: {
     Animes
   },
-  setup(_props, context) {
+  setup() {
     const pageTitle = PAGE_TITLE
-    // const seasonId = ref<number>()
-    const thisSeason = ref<string>()
+    let thisSeason = ''
 
-    // TODO: default.vueでシーズン情報をstoreにいれてからじゃないと取れないので一時的にsetTimeoutしてる
-    setTimeout(() => {
-      const season: Season[] = context.root.$store.state.season.season
-      // context.root.$nuxt.$store.commit('season/filterSeasonId', season)
-      console.log('season', season)
-      context.root.$nuxt.$store.commit('season/filterThisSeason', season)
-      // seasonId.value = context.root.$store.state.season.thisSeasonId
-      thisSeason.value = context.root.$store.state.season.thisSeason
-    }, 1000)
+    const splited = dayjs()
+      .locale(ja)
+      .format('YYYY-MM')
+      .split('-')
+
+    if (splited[1] === '04' || splited[1] === '05' || splited[1] === '06') {
+      thisSeason = splited[0] + '-spring'
+    } else if (splited[1] === '07' || splited[1] === '08' || splited[1] === '09') {
+      thisSeason = splited[0] + '-summer'
+    } else if (splited[1] === '10' || splited[1] === '11' || splited[1] === '12') {
+      thisSeason = splited[0] + '-autumn'
+    } else if (splited[1] === '01' || splited[1] === '02' || splited[1] === '03') {
+      thisSeason = splited[0] + '-winter'
+    }
 
     return {
       pageTitle,
