@@ -43,11 +43,11 @@
           <v-list-item
             v-for="(season, i) in displaySeason"
             :key="i"
-            :to="`/bySeason/${season.id}`"
+            :to="`/bySeason/${season.seasonText}`"
             @click="setDisplaySeason(season.displaySeason)"
           >
             <v-list-item-icon />
-            <v-list-item-title v-text="season.displaySeason" class="my_font" />
+            <v-list-item-title class="my_font" v-text="season.displaySeason" />
           </v-list-item>
         </v-list-group>
       </v-list>
@@ -81,7 +81,9 @@ export default defineComponent({
     let season: Season[] = []
 
     watchEffect(async () => {
-      season = await context.root.$axios.$get<Season[]>('/season')
+      season = await context.root.$axios.$get<Season[]>(
+        'https://9n0j8g7loh.execute-api.ap-northeast-1.amazonaws.com/prod/season'
+      )
       // idの降順にソート
       season.sort((a, b) => {
         if (a.id > b.id) return -1

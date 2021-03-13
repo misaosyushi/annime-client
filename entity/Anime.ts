@@ -1,12 +1,19 @@
+export type Animes = {
+  works: Anime[]
+}
+
 export type Anime = {
   id: number
-  annictId: number
   title: string
-  media: String
-  season: string
+  media: string
+  mediaText: string
+  seasonName: string
+  seasonNameText: string
   officialSiteUrl: string
-  twitterUserName: string
-  imageUrl: string
+  twitterUsername: string
+  images: {
+    recommendedUrl: string
+  }
 }
 
 export type Episode = {

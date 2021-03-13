@@ -7,7 +7,12 @@
           <v-card :elevation="hover ? 16 : 2" class="mx-auto" max-width="600">
             <nuxt-link :to="`/detail?id=${anime.id}&search=${anime.annictId}`">
               <!-- TODO: NO IMAGEの表示のさせ方をもう少し考える -->
-              <v-img v-if="$vuetify.breakpoint.smAndUp" height="250px" :src="anime.imageUrl" lazy-src="/no_image2.png">
+              <v-img
+                v-if="$vuetify.breakpoint.smAndUp"
+                height="250px"
+                :src="anime.images.recommendedUrl"
+                lazy-src="/no_image2.png"
+              >
                 <v-expand-transition>
                   <div
                     v-if="hover"
@@ -18,7 +23,7 @@
                   </div>
                 </v-expand-transition>
               </v-img>
-              <v-img v-else :src="anime.imageUrl" lazy-src="/no_image2.png" />
+              <v-img v-else :src="anime.images.recommendedUrl" lazy-src="/no_image2.png" />
             </nuxt-link>
             <nuxt-link :to="`/detail?id=${anime.id}&search=${anime.annictId}`" class="anime_link">
               <v-card-title class="my_font">{{ anime.title }}</v-card-title>
@@ -33,12 +38,12 @@
             <v-card-text class="my_font">
               <!-- TODO: コンポーネント化-->
               <v-chip color="accent" outlined>
-                <v-icon v-if="anime.media === 'TV'" left>mdi-television-classic</v-icon>
-                <v-icon v-else-if="anime.media === 'OVA'" left>mdi-video</v-icon>
-                <v-icon v-else-if="anime.media === '映画'" left>mdi-movie</v-icon>
-                <v-icon v-else-if="anime.media === 'Web'" left>mdi-web</v-icon>
-                <v-icon v-else-if="anime.media === 'その他'" left>mdi-television</v-icon>
-                {{ anime.media }}
+                <v-icon v-if="anime.mediaText === 'TV'" left>mdi-television-classic</v-icon>
+                <v-icon v-else-if="anime.mediaText === 'OVA'" left>mdi-video</v-icon>
+                <v-icon v-else-if="anime.mediaText === '映画'" left>mdi-movie</v-icon>
+                <v-icon v-else-if="anime.mediaText === 'Web'" left>mdi-web</v-icon>
+                <v-icon v-else-if="anime.mediaText === 'その他'" left>mdi-television</v-icon>
+                {{ anime.mediaText }}
               </v-chip>
             </v-card-text>
           </v-card>
@@ -49,8 +54,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watchEffect } from '@vue/composition-api'
-import { Anime } from '@/entity/Anime'
+import { defineComponent, ref, onMounted } from '@vue/composition-api'
+import { Anime, Animes } from '@/entity/Anime'
 
 export default defineComponent({
   props: {
@@ -59,7 +64,7 @@ export default defineComponent({
       default: ''
     },
     seasonId: {
-      type: Number,
+      type: String,
       default: 0
     }
   },
@@ -67,9 +72,17 @@ export default defineComponent({
     const animes = ref<Anime[]>([])
     const title = ref<string>(props.seasonTitle)
 
-    watchEffect(async () => {
-      if (props.seasonId !== 0) {
-        animes.value = await context.root.$axios.$get<Anime[]>(`/annimes/${props.seasonId}`)
+    onMounted(async () => {
+      if (props.seasonId !== '') {
+        // animes.value = await context.root.$axios.$get<Anime[]>(`/works/${props.seasonId}`)
+        const res = await context.root.$axios.$get<Animes>(`/works`, {
+          params: {
+            access_token: process.env.NUXT_ENV_ACCESS_TOKEN,
+            filter_season: '2021-winter',
+            sort_watchers_count: 'desc'
+          }
+        })
+        animes.value = res.works
       }
     })
 

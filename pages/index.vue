@@ -1,5 +1,5 @@
 <template>
-  <animes :season-title="pageTitle" :season-id="seasonId" />
+  <animes :season-title="pageTitle" :season-id="thisSeason" />
 </template>
 
 <script lang="ts">
@@ -30,18 +30,22 @@ export default defineComponent({
   },
   setup(_props, context) {
     const pageTitle = PAGE_TITLE
-    const seasonId = ref<number>()
+    // const seasonId = ref<number>()
+    const thisSeason = ref<string>()
 
     // TODO: default.vueでシーズン情報をstoreにいれてからじゃないと取れないので一時的にsetTimeoutしてる
     setTimeout(() => {
       const season: Season[] = context.root.$store.state.season.season
-      context.root.$nuxt.$store.commit('season/filterSeasonId', season)
-      seasonId.value = context.root.$store.state.season.thisSeasonId
+      // context.root.$nuxt.$store.commit('season/filterSeasonId', season)
+      console.log('season', season)
+      context.root.$nuxt.$store.commit('season/filterThisSeason', season)
+      // seasonId.value = context.root.$store.state.season.thisSeasonId
+      thisSeason.value = context.root.$store.state.season.thisSeason
     }, 1000)
 
     return {
       pageTitle,
-      seasonId
+      thisSeason
     }
   }
 })
