@@ -1,51 +1,14 @@
-exports.handler = async (event) => {
-  const seasonList = [
-    {
-      id: 1,
-      seasonName: '2019-winter',
-      seasonNameText: '2019年冬'
-    },
-    {
-      id: 2,
-      seasonName: '2019-spring',
-      seasonNameText: '2019年春'
-    },
-    {
-      id: 3,
-      seasonName: '2019-summer',
-      seasonNameText: '2019年夏'
-    },
-    {
-      id: 4,
-      seasonName: '2019-autumn',
-      seasonNameText: '2019年秋'
-    },
-    {
-      id: 5,
-      seasonName: '2020-winter',
-      seasonNameText: '2020年冬'
-    },
-    {
-      id: 6,
-      seasonName: '2020-spring',
-      seasonNameText: '2020年春'
-    },
-    {
-      id: 7,
-      seasonName: '2020-summer',
-      seasonNameText: '2020年夏'
-    },
-    {
-      id: 8,
-      seasonName: '2020-autumn',
-      seasonNameText: '2020年秋'
-    },
-    {
-      id: 9,
-      seasonName: '2021-winter',
-      seasonNameText: '2021年冬'
-    }
-  ]
+const AWS = require('aws-sdk')
+const s3 = new AWS.S3({ region: 'ap-northeast-1' })
+
+exports.handler = async () => {
+  const data = await s3
+    .getObject({
+      Bucket: process.env.BUCKET_NAME,
+      Key: process.env.FILE_PATH
+    })
+    .promise()
+  const seasonList = JSON.parse(data.Body)
 
   const today = new Date()
   const year = today.getFullYear()
@@ -67,6 +30,8 @@ exports.handler = async (event) => {
         yearMonthText = `${year}年冬`
         break
     }
+
+    // 新シーズンの要素を追加
     const alreadyExists = seasonList.some((season) => season.seasonName === yearMonth)
     if (!alreadyExists) {
       seasonList.push({
@@ -75,7 +40,15 @@ exports.handler = async (event) => {
         seasonNameText: yearMonthText
       })
     }
+
+    // jsonを更新しておく
+    s3.putObject({
+      Bucket: process.env.BUCKET_NAME,
+      Key: process.env.FILE_PATH,
+      Body: JSON.stringify(seasonList)
+    }).promise()
   }
+
   return {
     statusCode: 200,
     headers: {

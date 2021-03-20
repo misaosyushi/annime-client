@@ -1,0 +1,67 @@
+[
+  {
+    "id": 1,
+    "seasonName": "2018-winter",
+    "seasonNameText": "2018年冬"
+  },
+  {
+    "id": 2,
+    "seasonName": "2018-spring",
+    "seasonNameText": "2018年春"
+  },
+  {
+    "id": 3,
+    "seasonName": "2018-summer",
+    "seasonNameText": "2018年夏"
+  },
+  {
+    "id": 4,
+    "seasonName": "2018-autumn",
+    "seasonNameText": "2018年秋"
+  },
+  {
+    "id": 5,
+    "seasonName": "2019-winter",
+    "seasonNameText": "2019年冬"
+  },
+  {
+    "id": 6,
+    "seasonName": "2019-spring",
+    "seasonNameText": "2019年春"
+  },
+  {
+    "id": 7,
+    "seasonName": "2019-summer",
+    "seasonNameText": "2019年夏"
+  },
+  {
+    "id": 8,
+    "seasonName": "2019-autumn",
+    "seasonNameText": "2019年秋"
+  },
+  {
+    "id": 9,
+    "seasonName": "2020-winter",
+    "seasonNameText": "2020年冬"
+  },
+  {
+    "id": 10,
+    "seasonName": "2020-spring",
+    "seasonNameText": "2020年春"
+  },
+  {
+    "id": 11,
+    "seasonName": "2020-summer",
+    "seasonNameText": "2020年夏"
+  },
+  {
+    "id": 12,
+    "seasonName": "2020-autumn",
+    "seasonNameText": "2020年秋"
+  },
+  {
+    "id": 13,
+    "seasonName": "2021-winter",
+    "seasonNameText": "2021年冬"
+  }
+]
