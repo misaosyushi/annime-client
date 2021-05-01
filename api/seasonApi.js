@@ -14,29 +14,33 @@ exports.handler = async () => {
   const year = today.getFullYear()
   const month = today.getMonth() + 1
   if (month === 4 || month === 7 || month === 10 || month === 1) {
-    const yearMonth = `${year}-${month}`
+    let seasonName = ''
     let yearMonthText = ''
     switch (month) {
       case 4:
         yearMonthText = `${year}年春`
+        seasonName = `${year}-spring`
         break
       case 7:
         yearMonthText = `${year}年夏`
+        seasonName = `${year}-summer`
         break
       case 10:
         yearMonthText = `${year}年秋`
+        seasonName = `${year}-autumn`
         break
       case 1:
         yearMonthText = `${year}年冬`
+        seasonName = `${year}-winter`
         break
     }
 
     // 新シーズンの要素を追加
-    const alreadyExists = seasonList.some((season) => season.seasonName === yearMonth)
-    if (!alreadyExists) {
+    const isExists = seasonList.some((season) => season.seasonName === seasonName)
+    if (!isExists) {
       seasonList.push({
         id: seasonList.slice(-1)[0].id + 1,
-        seasonName: yearMonth,
+        seasonName,
         seasonNameText: yearMonthText
       })
     }
