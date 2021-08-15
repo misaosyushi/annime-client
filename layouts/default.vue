@@ -4,12 +4,22 @@
     <v-card v-if="$vuetify.breakpoint.smAndUp" flat tile class="header">
       <v-app-bar height="65px" dark fixed flat color="#4d4d4d">
         <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-        <v-img src="/aniweb_logo2.png" max-width="170" max-height="140" />
-        <!-- TODO: 検索機能 -->
-        <!--      <v-spacer />-->
-        <!--      <v-col sm="4">-->
-        <!--        <v-text-field outlined clearable label="Coming soon..." prepend-inner-icon="mdi-magnify" class="search_box" />-->
-        <!--      </v-col>-->
+        <router-link to="/">
+          <v-img src="/aniweb_logo2.png" max-width="170" max-height="140" />
+        </router-link>
+        <v-spacer />
+        <v-col sm="4">
+          <v-text-field
+            v-model="searchTitle"
+            outlined
+            clearable
+            dense
+            label="タイトルで検索"
+            prepend-inner-icon="mdi-magnify"
+            class="search_box"
+            @keyup.enter="submit(searchTitle)"
+          />
+        </v-col>
       </v-app-bar>
     </v-card>
     <v-card v-else flat tile>
@@ -73,6 +83,7 @@ export default defineComponent({
     const title = ref<string>('アニウェブ')
     const drawer = ref<boolean>(false)
     const seasonList = ref<Season[]>([])
+    const searchTitle = ''
 
     onMounted(async () => {
       seasonList.value = await context.root.$axios.$get<Season[]>(
@@ -86,6 +97,14 @@ export default defineComponent({
       })
     })
 
+    const submit = (searchTitle: string) => {
+      if (searchTitle === '' || searchTitle == null) {
+        context.root.$router.push('/')
+        return
+      }
+      context.root.$router.push(`/searchResult?title=${searchTitle}`)
+    }
+
     const setSeasonNameText = (seasonName: string) => {
       context.root.$nuxt.$store.commit('season/setSeasonNameText', seasonName)
     }
@@ -94,6 +113,8 @@ export default defineComponent({
       title,
       drawer,
       seasonList,
+      searchTitle,
+      submit,
       setSeasonNameText
     }
   }

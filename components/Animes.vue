@@ -50,6 +50,7 @@
         </v-hover>
       </v-col>
     </v-row>
+    <span v-if="isNoResultsMessage">{{ noResultsMessage }}</span>
   </v-layout>
 </template>
 
@@ -66,13 +67,20 @@ export default defineComponent({
     targetSeason: {
       type: String,
       default: ''
+    },
+    targetAnimeTitle: {
+      type: String,
+      default: ''
     }
   },
   setup(props, context: SetupContext) {
     const animes = ref<Anime[]>([])
     const title = ref<string>(props.seasonTitle)
+    const noResultsMessage = '一致するアニメはありませんでした。'
+    const isNoResultsMessage = ref<boolean>(false)
 
     onMounted(async () => {
+      // TODO: リファクタ
       if (props.targetSeason !== '') {
         const res = await context.root.$axios.$get<Animes>(`/works`, {
           params: {
@@ -83,11 +91,26 @@ export default defineComponent({
         })
         animes.value = res.works
       }
+
+      if (props.targetAnimeTitle !== '') {
+        const res = await context.root.$axios.$get<Animes>(`/works`, {
+          params: {
+            access_token: process.env.NUXT_ENV_ACCESS_TOKEN,
+            filter_title: props.targetAnimeTitle,
+            sort_watchers_count: 'desc'
+          }
+        })
+        animes.value = res.works
+      }
+
+      if (animes.value.length === 0) isNoResultsMessage.value = true
     })
 
     return {
       animes,
-      title
+      title,
+      noResultsMessage,
+      isNoResultsMessage
     }
   }
 })
