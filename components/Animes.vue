@@ -50,6 +50,7 @@
         </v-hover>
       </v-col>
     </v-row>
+    <!-- TODO: デザイン調整 -->
     <span v-if="isNoResultsMessage">{{ noResultsMessage }}</span>
   </v-layout>
 </template>

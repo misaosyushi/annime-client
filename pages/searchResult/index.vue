@@ -27,6 +27,7 @@ export default defineComponent({
     Animes
   },
   setup(_props, context: SetupContext) {
+    // TODO: 検索 -> 検索のときに再リクエスト投げれてない問題
     const animeTitle = context.root.$route.query.title || ''
     console.log(animeTitle)
 
