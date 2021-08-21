@@ -1,6 +1,7 @@
 <template>
   <v-layout column>
-    <h1 class="my_font">{{ title }}</h1>
+    <h1 v-if="$props.targetAnimeTitle !== ''" class="my_font">{{ title }}: {{ $props.targetAnimeTitle }}</h1>
+    <h1 v-else class="my_font">{{ title }}</h1>
     <v-row>
       <v-col v-for="anime in animes" :key="anime.id" class="anime_card">
         <v-hover v-slot:default="{ hover }">
