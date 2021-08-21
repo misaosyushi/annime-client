@@ -56,7 +56,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted, SetupContext } from '@vue/composition-api'
+import { defineComponent, ref, SetupContext, watchEffect } from '@vue/composition-api'
 import { Anime, Animes } from '@/entity/Anime'
 
 export default defineComponent({
@@ -80,7 +80,7 @@ export default defineComponent({
     const noResultsMessage = '一致するアニメはありませんでした。'
     const isNoResultsMessage = ref<boolean>(false)
 
-    onMounted(async () => {
+    watchEffect(async () => {
       // TODO: リファクタ
       if (props.targetSeason !== '') {
         const res = await context.root.$axios.$get<Animes>(`/works`, {

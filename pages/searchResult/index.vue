@@ -1,9 +1,11 @@
 <template>
-  <animes season-title="検索結果" :target-anime-title="animeTitle" />
+  <div>
+    <animes season-title="検索結果" :target-anime-title="animeTitle" />
+  </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, SetupContext } from '@vue/composition-api'
+import { computed, defineComponent, SetupContext } from '@vue/composition-api'
 import Animes from '@/components/Animes.vue'
 import 'dayjs/locale/ja'
 
@@ -27,9 +29,7 @@ export default defineComponent({
     Animes
   },
   setup(_props, context: SetupContext) {
-    // TODO: 検索 -> 検索のときに再リクエスト投げれてない問題
-    const animeTitle = context.root.$route.query.title || ''
-    console.log(animeTitle)
+    const animeTitle = computed(() => context.root.$route.query.title || '')
 
     return {
       animeTitle
