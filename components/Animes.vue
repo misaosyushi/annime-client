@@ -105,7 +105,7 @@ export default defineComponent({
         animes.value = res.works
       }
 
-      if (animes.value.length === 0) isNoResultsMessage.value = true
+      isNoResultsMessage.value = animes.value.length === 0
     })
 
     return {
