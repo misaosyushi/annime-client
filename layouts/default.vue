@@ -8,7 +8,7 @@
           <v-img src="/aniweb_logo2.png" max-width="170" max-height="140" />
         </router-link>
         <v-spacer />
-        <v-col sm="4">
+        <v-col sm="3" md="3">
           <v-text-field
             v-model="searchTitle"
             outlined
@@ -17,7 +17,7 @@
             label="タイトルで検索"
             prepend-inner-icon="mdi-magnify"
             class="search_box"
-            @keyup.enter="submit(searchTitle)"
+            @keyup.enter="searchByTitle(searchTitle)"
           />
         </v-col>
       </v-app-bar>
@@ -97,7 +97,7 @@ export default defineComponent({
       })
     })
 
-    const submit = (searchTitle: string) => {
+    const searchByTitle = (searchTitle: string) => {
       if (searchTitle === '' || searchTitle == null) {
         context.root.$router.push('/')
         return
@@ -114,7 +114,7 @@ export default defineComponent({
       drawer,
       seasonList,
       searchTitle,
-      submit,
+      searchByTitle,
       setSeasonNameText
     }
   }
