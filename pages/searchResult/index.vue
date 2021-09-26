@@ -1,6 +1,6 @@
 <template>
   <div>
-    <animes season-title="検索結果" :target-anime-title="animeTitle" />
+    <animes page-title="検索結果" :target-anime-title="animeTitle" />
   </div>
 </template>
 

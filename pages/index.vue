@@ -1,5 +1,5 @@
 <template>
-  <animes :season-title="pageTitle" :target-season="thisSeason" />
+  <animes :page-title="pageTitle" :target-season="thisSeason" />
 </template>
 
 <script lang="ts">

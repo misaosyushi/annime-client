@@ -1,5 +1,5 @@
 <template>
-  <animes :season-title="seasonName + 'のアニメ'" :target-season="$route.params.seasonId" />
+  <animes :page-title="seasonName + 'のアニメ'" :target-season="$route.params.seasonId" />
 </template>
 
 <script lang="ts">

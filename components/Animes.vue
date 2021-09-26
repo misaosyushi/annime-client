@@ -62,7 +62,7 @@ import { Anime, Animes } from '@/entity/Anime'
 
 export default defineComponent({
   props: {
-    seasonTitle: {
+    pageTitle: {
       type: String,
       default: ''
     },
@@ -77,7 +77,7 @@ export default defineComponent({
   },
   setup(props, context: SetupContext) {
     const animes = ref<Anime[]>([])
-    const title = ref<string>(props.seasonTitle)
+    const title = ref<string>(props.pageTitle)
     const noResultsMessage = '一致するアニメはありませんでした。'
     const isNoResultsMessage = ref<boolean>(false)
 
