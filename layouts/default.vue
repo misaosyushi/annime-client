@@ -22,10 +22,25 @@
         </v-col>
       </v-app-bar>
     </v-card>
-    <v-card v-else flat tile>
+    <v-card v-else flat tile class="header_sp">
       <v-app-bar height="65px" dark fixed flat color="#4d4d4d">
         <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-        <v-img src="/aniweb_logo2.png" max-width="110" max-height="80" />
+        <router-link to="/">
+          <v-img src="/aniweb_logo2.png" max-width="110" max-height="80" />
+        </router-link>
+        <v-spacer />
+        <v-col cols="7.5" sm="3" md="3">
+          <v-text-field
+            v-model="searchTitle"
+            outlined
+            clearable
+            dense
+            label="タイトルで検索"
+            prepend-inner-icon="mdi-magnify"
+            class="search_box_sp"
+            @keyup.enter="searchByTitle(searchTitle)"
+          />
+        </v-col>
       </v-app-bar>
     </v-card>
     <!-- side bar -->
@@ -127,6 +142,15 @@ export default defineComponent({
   position: relative;
 }
 
+.search_box_sp {
+  top: 15px;
+  position: relative;
+  // TODO: フォントサイズ
+  .v-input .v-label {
+    font-size: 12px !important;
+  }
+}
+
 .main_content {
   padding: 10px 35px;
   max-width: 1800px;
@@ -134,6 +158,10 @@ export default defineComponent({
 
 .header {
   margin-bottom: 75px;
+}
+
+.header_sp {
+  margin-bottom: 60px;
 }
 
 .sidebar {
