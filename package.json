@@ -15,35 +15,29 @@
   "lint-staged": {
     "*.{js,vue}": "npm run fix"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "dependencies": {
-    "@nuxtjs/axios": "^5.3.6",
+    "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/composition-api": "^0.30.0",
-    "@nuxtjs/dotenv": "^1.4.0",
-    "@nuxtjs/pwa": "^3.0.0-0",
-    "@vue/composition-api": "^1.4.0",
-    "camelcase-keys": "^6.2.2",
-    "dayjs": "^1.8.26",
+    "@nuxtjs/dotenv": "^1.4.1",
+    "@nuxtjs/pwa": "^3.3.5",
+    "camelcase-keys": "^7.0.1",
+    "dayjs": "^1.10.7",
     "nuxt": "^2.15.8",
-    "snakecase-keys": "^3.2.1",
-    "vuex-persistedstate": "^3.0.1"
+    "snakecase-keys": "^5.1.2",
+    "vuex-persistedstate": "^4.1.0"
   },
   "devDependencies": {
     "@nuxt/types": "^2.15.8",
     "@nuxt/typescript-build": "^2.1.0",
     "@nuxtjs/eslint-config-typescript": "^7.0.2",
     "@nuxtjs/eslint-module": "^3.0.2",
-    "@nuxtjs/vuetify": "^1.0.0",
+    "@nuxtjs/vuetify": "^1.12.1",
     "babel-eslint": "^10.0.1",
-    "eslint": "^8.0.3",
+    "eslint": "^8.3.0",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-nuxt": ">=0.4.2",
-    "husky": "^4.0.0",
+    "eslint-plugin-nuxt": "^3.0.0",
+    "husky": "^7.0.4",
     "lint-staged": "^12.1.2",
-    "prettier": "^1.19.1"
+    "prettier": "^2.5.0"
   }
 }
