@@ -22,7 +22,7 @@
                   <div
                     v-if="hover"
                     class="d-flex transition-fast-in-fast-out v-card--reveal display-1 white--text"
-                    style="height: 100%;"
+                    style="height: 100%"
                   >
                     <span class="my_font">詳細を見る</span>
                   </div>
@@ -36,9 +36,7 @@
               </v-card-title>
             </nuxt-link>
             <v-divider />
-            <v-card-subtitle
-              class="my_font"
-            >
+            <v-card-subtitle class="my_font">
               公式サイトURL：
               <a :href="anime.officialSiteUrl" target="_blank" rel="noopener noreferrer" class="anime_link">
                 {{ anime.officialSiteUrl }}

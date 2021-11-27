@@ -10,7 +10,7 @@
     "generate": "nuxt generate",
     "start": "nuxt start",
     "lint": "eslint --ext .ts,.js,.vue .",
-    "fix": "eslint --ext .ts,.js,.vue . --fix"
+    "fix": "prettier -w .; eslint --ext .ts,.js,.vue . --fix"
   },
   "lint-staged": {
     "*.{js,vue}": "npm run fix"
@@ -20,9 +20,11 @@
     "@nuxtjs/composition-api": "^0.30.0",
     "@nuxtjs/dotenv": "^1.4.1",
     "@nuxtjs/pwa": "^3.3.5",
+    "@pinia/nuxt": "^0.1.5",
     "camelcase-keys": "^7.0.1",
     "dayjs": "^1.10.7",
     "nuxt": "^2.15.8",
+    "pinia": "^2.0.4",
     "snakecase-keys": "^5.1.2",
     "vuex-persistedstate": "^4.1.0"
   },

@@ -39,7 +39,12 @@ export default {
   /*
    ** Nuxt.js dev-modules
    */
-  buildModules: ['@nuxt/typescript-build', '@nuxtjs/vuetify', '@nuxtjs/composition-api/module'],
+  buildModules: [
+    '@nuxt/typescript-build',
+    '@nuxtjs/vuetify',
+    '@nuxtjs/composition-api/module',
+    ['@pinia/nuxt', { disableVuex: false }] // TODO: vuexはdisableにする
+  ],
   /*
    ** Nuxt.js modules
    */

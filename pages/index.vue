@@ -18,10 +18,7 @@ export default defineComponent({
     const pageTitle = PAGE_TITLE
     let thisSeason = ''
 
-    const splited = dayjs()
-      .locale(ja)
-      .format('YYYY-MM')
-      .split('-')
+    const splited = dayjs().locale(ja).format('YYYY-MM').split('-')
 
     if (splited[1] === '04' || splited[1] === '05' || splited[1] === '06') {
       thisSeason = splited[0] + '-spring'
