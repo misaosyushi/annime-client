@@ -8,6 +8,16 @@ import Animes from '@/components/Animes.vue'
 import 'dayjs/locale/ja'
 
 export default defineComponent({
+  components: {
+    Animes
+  },
+  setup(_props, context: SetupContext) {
+    const seasonName = context.root.$store.state.season.seasonNameText
+
+    return {
+      seasonName
+    }
+  },
   head() {
     return {
       title: 'クール別アニメ一覧',
@@ -21,16 +31,6 @@ export default defineComponent({
         }
       ],
       link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.png' }]
-    }
-  },
-  components: {
-    Animes
-  },
-  setup(_props, context: SetupContext) {
-    const seasonName = context.root.$store.state.season.seasonNameText
-
-    return {
-      seasonName
     }
   }
 })

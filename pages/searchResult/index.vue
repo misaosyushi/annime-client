@@ -10,6 +10,16 @@ import Animes from '@/components/Animes.vue'
 import 'dayjs/locale/ja'
 
 export default defineComponent({
+  components: {
+    Animes
+  },
+  setup(_props, context: SetupContext) {
+    const animeTitle = computed(() => context.root.$route.query.title || '')
+
+    return {
+      animeTitle
+    }
+  },
   head() {
     return {
       title: '検索結果',
@@ -23,16 +33,6 @@ export default defineComponent({
         }
       ],
       link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.png' }]
-    }
-  },
-  components: {
-    Animes
-  },
-  setup(_props, context: SetupContext) {
-    const animeTitle = computed(() => context.root.$route.query.title || '')
-
-    return {
-      animeTitle
     }
   }
 })

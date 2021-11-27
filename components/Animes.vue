@@ -1,10 +1,14 @@
 <template>
   <v-layout column>
-    <h1 v-if="$props.targetAnimeTitle !== ''" class="my_font">{{ title }}: {{ $props.targetAnimeTitle }}</h1>
-    <h1 v-else class="my_font">{{ title }}</h1>
+    <h1 v-if="$props.targetAnimeTitle !== ''" class="my_font">
+      {{ title }}: {{ $props.targetAnimeTitle }}
+    </h1>
+    <h1 v-else class="my_font">
+      {{ title }}
+    </h1>
     <v-row>
       <v-col v-for="anime in animes" :key="anime.id" class="anime_card">
-        <v-hover v-slot:default="{ hover }">
+        <v-hover v-slot="{ hover }">
           <v-card :elevation="hover ? 16 : 2" class="mx-auto" max-width="600">
             <nuxt-link :to="`/detail?id=${anime.id}`">
               <!-- TODO: NO IMAGEの表示のさせ方をもう少し考える -->
@@ -27,11 +31,15 @@
               <v-img v-else :src="anime.images.recommendedUrl" lazy-src="/no_image2.png" />
             </nuxt-link>
             <nuxt-link :to="`/detail?id=${anime.id}`" class="anime_link">
-              <v-card-title class="my_font">{{ anime.title }}</v-card-title>
+              <v-card-title class="my_font">
+                {{ anime.title }}
+              </v-card-title>
             </nuxt-link>
             <v-divider />
-            <v-card-subtitle class="my_font"
-              >公式サイトURL：
+            <v-card-subtitle
+              class="my_font"
+            >
+              公式サイトURL：
               <a :href="anime.officialSiteUrl" target="_blank" rel="noopener noreferrer" class="anime_link">
                 {{ anime.officialSiteUrl }}
               </a>
@@ -39,11 +47,21 @@
             <v-card-text class="my_font">
               <!-- TODO: コンポーネント化-->
               <v-chip color="accent" outlined>
-                <v-icon v-if="anime.mediaText === 'TV'" left>mdi-television-classic</v-icon>
-                <v-icon v-else-if="anime.mediaText === 'OVA'" left>mdi-video</v-icon>
-                <v-icon v-else-if="anime.mediaText === '映画'" left>mdi-movie</v-icon>
-                <v-icon v-else-if="anime.mediaText === 'Web'" left>mdi-web</v-icon>
-                <v-icon v-else-if="anime.mediaText === 'その他'" left>mdi-television</v-icon>
+                <v-icon v-if="anime.mediaText === 'TV'" left>
+                  mdi-television-classic
+                </v-icon>
+                <v-icon v-else-if="anime.mediaText === 'OVA'" left>
+                  mdi-video
+                </v-icon>
+                <v-icon v-else-if="anime.mediaText === '映画'" left>
+                  mdi-movie
+                </v-icon>
+                <v-icon v-else-if="anime.mediaText === 'Web'" left>
+                  mdi-web
+                </v-icon>
+                <v-icon v-else-if="anime.mediaText === 'その他'" left>
+                  mdi-television
+                </v-icon>
                 {{ anime.mediaText }}
               </v-chip>
             </v-card-text>
@@ -84,7 +102,7 @@ export default defineComponent({
     watchEffect(async () => {
       // TODO: リファクタ
       if (props.targetSeason !== '') {
-        const res = await context.root.$axios.$get<Animes>(`/works`, {
+        const res = await context.root.$axios.$get<Animes>('/works', {
           params: {
             access_token: process.env.NUXT_ENV_ACCESS_TOKEN,
             filter_season: props.targetSeason,
@@ -95,7 +113,7 @@ export default defineComponent({
       }
 
       if (props.targetAnimeTitle !== '') {
-        const res = await context.root.$axios.$get<Animes>(`/works`, {
+        const res = await context.root.$axios.$get<Animes>('/works', {
           params: {
             access_token: process.env.NUXT_ENV_ACCESS_TOKEN,
             filter_title: props.targetAnimeTitle,

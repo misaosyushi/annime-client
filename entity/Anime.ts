@@ -1,7 +1,3 @@
-export type Animes = {
-  works: Anime[]
-}
-
 export type Anime = {
   id: number
   title: string
@@ -16,8 +12,8 @@ export type Anime = {
   }
 }
 
-export type Episodes = {
-  episodes: Episode[]
+export type Animes = {
+  works: Anime[]
 }
 
 export type Episode = {
@@ -26,8 +22,8 @@ export type Episode = {
   title: string
 }
 
-export type Casts = {
-  casts: Cast[]
+export type Episodes = {
+  episodes: Episode[]
 }
 
 export type Cast = {
@@ -36,6 +32,10 @@ export type Cast = {
   character: {
     name: string
   }
+}
+
+export type Casts = {
+  casts: Cast[]
 }
 
 export type Season = {

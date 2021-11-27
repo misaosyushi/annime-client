@@ -4,7 +4,7 @@ require('dotenv').config()
 console.info('API base url:', process.env.NUXT_ENV_BASE_URL)
 
 export default {
-  mode: 'spa',
+  ssr: false,
   /*
    ** Headers of the page
    */
@@ -35,11 +35,11 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['@/plugins/composition-api', '@/plugins/vuex-persistedstate', '@/plugins/axios'],
+  plugins: ['@/plugins/vuex-persistedstate', '@/plugins/axios'],
   /*
    ** Nuxt.js dev-modules
    */
-  buildModules: ['@nuxt/typescript-build', '@nuxtjs/vuetify'],
+  buildModules: ['@nuxt/typescript-build', '@nuxtjs/vuetify', '@nuxtjs/composition-api/module'],
   /*
    ** Nuxt.js modules
    */

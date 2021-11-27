@@ -5,14 +5,15 @@
   "author": "misaosyushi",
   "private": true,
   "scripts": {
-    "dev": "nuxt-ts",
-    "build": "nuxt-ts build",
-    "generate": "nuxt-ts generate",
-    "start": "nuxt-ts start",
-    "lint": "eslint --ext .js,.vue --ignore-path .gitignore ."
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "generate": "nuxt generate",
+    "start": "nuxt start",
+    "lint": "eslint --ext .ts,.js,.vue .",
+    "fix": "eslint --ext .ts,.js,.vue . --fix"
   },
   "lint-staged": {
-    "*.{js,vue}": "npm run lint"
+    "*.{js,vue}": "npm run fix"
   },
   "husky": {
     "hooks": {
@@ -20,29 +21,29 @@
     }
   },
   "dependencies": {
-    "@nuxt/typescript-runtime": "^0.4.0",
     "@nuxtjs/axios": "^5.3.6",
+    "@nuxtjs/composition-api": "^0.30.0",
     "@nuxtjs/dotenv": "^1.4.0",
     "@nuxtjs/pwa": "^3.0.0-0",
-    "@vue/composition-api": "^0.5.0",
+    "@vue/composition-api": "^1.4.0",
     "camelcase-keys": "^6.2.2",
     "dayjs": "^1.8.26",
-    "nuxt": "^2.0.0",
+    "nuxt": "^2.15.8",
     "snakecase-keys": "^3.2.1",
     "vuex-persistedstate": "^3.0.1"
   },
   "devDependencies": {
-    "@nuxt/typescript-build": "^0.6.0",
-    "@nuxtjs/eslint-config-typescript": "^1.0.0",
-    "@nuxtjs/eslint-module": "^1.0.0",
+    "@nuxt/types": "^2.15.8",
+    "@nuxt/typescript-build": "^2.1.0",
+    "@nuxtjs/eslint-config-typescript": "^7.0.2",
+    "@nuxtjs/eslint-module": "^3.0.2",
     "@nuxtjs/vuetify": "^1.0.0",
     "babel-eslint": "^10.0.1",
-    "eslint": "^6.1.0",
-    "eslint-config-prettier": "^6.10.0",
+    "eslint": "^8.0.3",
+    "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-nuxt": ">=0.4.2",
-    "eslint-plugin-prettier": "^3.1.2",
     "husky": "^4.0.0",
-    "lint-staged": "^10.0.0",
+    "lint-staged": "^12.1.2",
     "prettier": "^1.19.1"
   }
 }

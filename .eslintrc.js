@@ -4,19 +4,10 @@ module.exports = {
     browser: true,
     node: true
   },
-  extends: [
-    '@nuxtjs/eslint-config-typescript',
-    'prettier',
-    'prettier/vue',
-    'plugin:prettier/recommended',
-    'plugin:nuxt/recommended'
-  ],
-  plugins: [
-    'prettier'
-  ],
+  extends: ['@nuxtjs/eslint-config-typescript', 'plugin:nuxt/recommended'],
   // add your custom rules here
   rules: {
-    "no-console": "off",
-    "prettier/prettier" : ["error", { printWidth: 120 }]
+    'no-console': 'off',
+    'space-before-function-paren': 0
   }
 }

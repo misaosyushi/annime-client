@@ -36,7 +36,7 @@ exports.handler = async () => {
     }
 
     // 新シーズンの要素を追加
-    const isExists = seasonList.some((season) => season.seasonName === seasonName)
+    const isExists = seasonList.some(season => season.seasonName === seasonName)
     if (!isExists) {
       seasonList.push({
         id: seasonList.slice(-1)[0].id + 1,

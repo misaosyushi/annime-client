@@ -55,13 +55,17 @@
           <v-list-item-icon>
             <v-icon>mdi-apps</v-icon>
           </v-list-item-icon>
-          <v-list-item-title class="my_font">Top</v-list-item-title>
+          <v-list-item-title class="my_font">
+            Top
+          </v-list-item-title>
         </v-list-item>
 
         <v-list-group prepend-icon="mdi-magnify">
-          <template v-slot:activator>
+          <template #activator>
             <v-list-item-content>
-              <v-list-item-title class="my_font">クール別一覧</v-list-item-title>
+              <v-list-item-title class="my_font">
+                クール別一覧
+              </v-list-item-title>
             </v-list-item-content>
           </template>
 
@@ -106,8 +110,8 @@ export default defineComponent({
       )
       // idの降順にソート
       seasonList.value.sort((a, b) => {
-        if (a.id > b.id) return -1
-        if (a.id < b.id) return 1
+        if (a.id > b.id) { return -1 }
+        if (a.id < b.id) { return 1 }
         return 0
       })
     })
