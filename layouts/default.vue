@@ -70,13 +70,13 @@
           </template>
 
           <v-list-item
-            v-for="(season, i) in seasonList"
+            v-for="(item, i) in seasonList"
             :key="i"
-            :to="`/bySeason/${season.seasonName}`"
-            @click="setSeasonNameText(season.seasonNameText)"
+            :to="`/bySeason/${item.seasonName}`"
+            @click="season.setSeasonNameText(item.seasonNameText)"
           >
             <v-list-item-icon />
-            <v-list-item-title class="my_font" v-text="season.seasonNameText" />
+            <v-list-item-title class="my_font" v-text="item.seasonNameText" />
           </v-list-item>
         </v-list-group>
       </v-list>
@@ -96,6 +96,7 @@
 <script lang="ts">
 import { defineComponent, ref, onMounted, SetupContext } from '@vue/composition-api'
 import { Season } from '@/entity/Anime'
+import { useSeason } from '@/store/season'
 
 export default defineComponent({
   setup(_props, context: SetupContext) {
@@ -128,9 +129,7 @@ export default defineComponent({
       context.root.$router.push(`/searchResult?title=${searchTitle}`)
     }
 
-    const setSeasonNameText = (seasonName: string) => {
-      context.root.$nuxt.$store.commit('season/setSeasonNameText', seasonName)
-    }
+    const season = useSeason()
 
     return {
       title,
@@ -138,7 +137,7 @@ export default defineComponent({
       seasonList,
       searchTitle,
       searchByTitle,
-      setSeasonNameText
+      season
     }
   }
 })
