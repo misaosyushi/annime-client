@@ -1,9 +1,9 @@
 <template>
   <v-layout column>
     <h1 v-if="$props.targetAnimeTitle !== ''" class="my_font">
-      {{ title }}: {{ $props.targetAnimeTitle }}
+      検索結果: {{ $props.targetAnimeTitle }}
     </h1>
-    <h1 v-if="title !== ''" class="my_font">
+    <h1 v-else-if="title !== ''" class="my_font">
       {{ title }}
     </h1>
     <h1 v-else class="my_font">

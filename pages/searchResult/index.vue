@@ -1,6 +1,6 @@
 <template>
   <div>
-    <animes page-title="検索結果" :target-anime-title="animeTitle" />
+    <animes :target-anime-title="animeTitle" />
   </div>
 </template>
 
@@ -8,6 +8,7 @@
 import { computed, defineComponent, SetupContext } from '@vue/composition-api'
 import Animes from '@/components/Animes.vue'
 import 'dayjs/locale/ja'
+import { useSeason } from '@/store/season'
 
 export default defineComponent({
   components: {
@@ -15,6 +16,8 @@ export default defineComponent({
   },
   setup(_props, context: SetupContext) {
     const animeTitle = computed(() => context.root.$route.query.title || '')
+    const season = useSeason()
+    season.reset()
 
     return {
       animeTitle
