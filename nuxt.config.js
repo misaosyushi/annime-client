@@ -35,7 +35,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['@/plugins/vuex-persistedstate', '@/plugins/axios'],
+  plugins: ['@/plugins/axios', '@/plugins/pinia-plugin-persist.client'],
   /*
    ** Nuxt.js dev-modules
    */
@@ -43,7 +43,7 @@ export default {
     '@nuxt/typescript-build',
     '@nuxtjs/vuetify',
     '@nuxtjs/composition-api/module',
-    ['@pinia/nuxt', { disableVuex: false }] // TODO: vuexはdisableにする
+    '@pinia/nuxt'
   ],
   /*
    ** Nuxt.js modules

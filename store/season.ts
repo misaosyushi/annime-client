@@ -9,5 +9,11 @@ export const useSeason = defineStore({
     setSeasonNameText(val: string) {
       this.seasonNameText = val
     }
+  },
+  persist: {
+    enabled: true,
+    strategies: [
+      { storage: localStorage }
+    ]
   }
 })

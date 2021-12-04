@@ -3,8 +3,11 @@
     <h1 v-if="$props.targetAnimeTitle !== ''" class="my_font">
       {{ title }}: {{ $props.targetAnimeTitle }}
     </h1>
-    <h1 v-else class="my_font">
+    <h1 v-if="title !== ''" class="my_font">
       {{ title }}
+    </h1>
+    <h1 v-else class="my_font">
+      {{ season.seasonNameText }}のアニメ
     </h1>
     <v-row>
       <v-col v-for="anime in animes" :key="anime.id" class="anime_card">
@@ -68,13 +71,14 @@
       </v-col>
     </v-row>
     <!-- TODO: デザイン調整 -->
-    <span v-if="isNoResultsMessage">{{ noResultsMessage }}</span>
+    <span v-if="isNoResultsMessage" class="message">{{ noResultsMessage }}</span>
   </v-layout>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref, SetupContext, watchEffect } from '@vue/composition-api'
 import { Anime, Animes } from '@/entity/Anime'
+import { useSeason } from '@/store/season'
 
 export default defineComponent({
   props: {
@@ -96,6 +100,7 @@ export default defineComponent({
     const title = ref<string>(props.pageTitle)
     const noResultsMessage = '一致するアニメはありませんでした。'
     const isNoResultsMessage = ref<boolean>(false)
+    const season = useSeason()
 
     watchEffect(async () => {
       // TODO: リファクタ
@@ -128,7 +133,8 @@ export default defineComponent({
       animes,
       title,
       noResultsMessage,
-      isNoResultsMessage
+      isNoResultsMessage,
+      season
     }
   }
 })
@@ -146,5 +152,9 @@ export default defineComponent({
   opacity: 0.4;
   position: absolute;
   width: 100%;
+}
+
+.message {
+  margin-top: 50px;
 }
 </style>

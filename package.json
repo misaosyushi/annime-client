@@ -25,8 +25,8 @@
     "dayjs": "^1.10.7",
     "nuxt": "^2.15.8",
     "pinia": "^2.0.4",
-    "snakecase-keys": "^5.1.2",
-    "vuex-persistedstate": "^4.1.0"
+    "pinia-plugin-persist": "^0.0.7",
+    "snakecase-keys": "^5.1.2"
   },
   "devDependencies": {
     "@nuxt/types": "^2.15.8",
