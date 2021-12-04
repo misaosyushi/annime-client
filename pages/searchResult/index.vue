@@ -17,7 +17,7 @@ export default defineComponent({
   setup(_props, context: SetupContext) {
     const animeTitle = computed(() => context.root.$route.query.title || '')
     const season = useSeason()
-    season.reset()
+    season.$reset()
 
     return {
       animeTitle
