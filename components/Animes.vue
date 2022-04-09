@@ -109,7 +109,8 @@ export default defineComponent({
           params: {
             access_token: process.env.NUXT_ENV_ACCESS_TOKEN,
             filter_season: props.targetSeason,
-            sort_watchers_count: 'desc'
+            sort_watchers_count: 'desc',
+            per_page: 50
           }
         })
         animes.value = res.works
@@ -120,7 +121,8 @@ export default defineComponent({
           params: {
             access_token: process.env.NUXT_ENV_ACCESS_TOKEN,
             filter_title: props.targetAnimeTitle,
-            sort_watchers_count: 'desc'
+            sort_watchers_count: 'desc',
+            per_page: 50
           }
         })
         animes.value = res.works
