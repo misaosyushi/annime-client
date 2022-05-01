@@ -14,6 +14,7 @@ export type Anime = {
 
 export type Animes = {
   works: Anime[]
+  totalCount: number
 }
 
 export type Episode = {

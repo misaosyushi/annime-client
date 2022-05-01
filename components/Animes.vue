@@ -72,6 +72,7 @@
     </v-row>
     <!-- TODO: デザイン調整 -->
     <span v-if="isNoResultsMessage" class="message">{{ noResultsMessage }}</span>
+    <pagination :page="1" :total-count="totalCount" @clickPage="clickPage" />
   </v-layout>
 </template>
 
@@ -79,8 +80,14 @@
 import { defineComponent, ref, SetupContext, watchEffect } from '@vue/composition-api'
 import { Anime, Animes } from '@/entity/Anime'
 import { useSeason } from '@/store/season'
+import Pagination from '@/components/Pagination.vue'
+
+const PER_PAGE = 25 // TODO: 全体で定数化
 
 export default defineComponent({
+  components: {
+    Pagination
+  },
   props: {
     pageTitle: {
       type: String,
@@ -97,6 +104,7 @@ export default defineComponent({
   },
   setup(props, context: SetupContext) {
     const animes = ref<Anime[]>([])
+    const totalCount = ref<number>()
     const title = ref<string>(props.pageTitle)
     const noResultsMessage = '一致するアニメはありませんでした。'
     const isNoResultsMessage = ref<boolean>(false)
@@ -110,10 +118,11 @@ export default defineComponent({
             access_token: process.env.NUXT_ENV_ACCESS_TOKEN,
             filter_season: props.targetSeason,
             sort_watchers_count: 'desc',
-            per_page: 50
+            per_page: PER_PAGE
           }
         })
         animes.value = res.works
+        totalCount.value = res.totalCount
       }
 
       if (props.targetAnimeTitle !== '') {
@@ -122,7 +131,7 @@ export default defineComponent({
             access_token: process.env.NUXT_ENV_ACCESS_TOKEN,
             filter_title: props.targetAnimeTitle,
             sort_watchers_count: 'desc',
-            per_page: 50
+            per_page: PER_PAGE
           }
         })
         animes.value = res.works
@@ -131,12 +140,30 @@ export default defineComponent({
       isNoResultsMessage.value = animes.value.length === 0
     })
 
+    const clickPage = async (targetPage: number) => {
+      // TODO: リファクタ
+      const res = await context.root.$axios.$get<Animes>('/works', {
+        params: {
+          access_token: process.env.NUXT_ENV_ACCESS_TOKEN,
+          filter_season: props.targetSeason,
+          sort_watchers_count: 'desc',
+          per_page: PER_PAGE,
+          page: targetPage
+        }
+      })
+      animes.value = res.works
+      totalCount.value = res.totalCount
+      window.scrollTo(0, 0)
+    }
+
     return {
       animes,
+      totalCount,
       title,
       noResultsMessage,
       isNoResultsMessage,
-      season
+      season,
+      clickPage
     }
   }
 })
