@@ -19,8 +19,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, watchEffect } from '@vue/composition-api'
-
-const PER_PAGE = 25 // TODO: 全体で定数化
+import { PER_PAGE } from '@/constants'
 
 export default defineComponent({
   props: {

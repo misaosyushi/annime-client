@@ -81,8 +81,7 @@ import { defineComponent, ref, SetupContext, watchEffect } from '@vue/compositio
 import { Anime, Animes } from '@/entity/Anime'
 import { useSeason } from '@/store/season'
 import Pagination from '@/components/Pagination.vue'
-
-const PER_PAGE = 25 // TODO: 全体で定数化
+import { PER_PAGE } from '@/constants'
 
 export default defineComponent({
   components: {
