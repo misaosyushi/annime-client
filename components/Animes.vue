@@ -81,7 +81,7 @@ import { defineComponent, ref, SetupContext, watchEffect } from '@vue/compositio
 import { Anime, Animes } from '@/entity/Anime'
 import { useSeason } from '@/store/season'
 import Pagination from '@/components/Pagination.vue'
-import { PER_PAGE } from '@/constants'
+import { PER_PAGE, SORT_DESC_PARAM } from '@/constants'
 
 export default defineComponent({
   components: {
@@ -116,7 +116,7 @@ export default defineComponent({
           params: {
             access_token: process.env.NUXT_ENV_ACCESS_TOKEN,
             filter_season: props.targetSeason,
-            sort_watchers_count: 'desc',
+            sort_watchers_count: SORT_DESC_PARAM,
             per_page: PER_PAGE
           }
         })
@@ -129,7 +129,7 @@ export default defineComponent({
           params: {
             access_token: process.env.NUXT_ENV_ACCESS_TOKEN,
             filter_title: props.targetAnimeTitle,
-            sort_watchers_count: 'desc',
+            sort_watchers_count: SORT_DESC_PARAM,
             per_page: PER_PAGE
           }
         })
@@ -145,7 +145,7 @@ export default defineComponent({
         params: {
           access_token: process.env.NUXT_ENV_ACCESS_TOKEN,
           filter_season: props.targetSeason,
-          sort_watchers_count: 'desc',
+          sort_watchers_count: SORT_DESC_PARAM,
           per_page: PER_PAGE,
           page: targetPage
         }

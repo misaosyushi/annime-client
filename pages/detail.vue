@@ -78,6 +78,7 @@
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api'
 import { Animes, Episodes, Casts } from '@/entity/Anime'
+import { SORT_ASC_PARAM } from '@/constants'
 
 export default defineComponent({
   async asyncData({ $axios, query }): Promise<any> {
@@ -93,14 +94,14 @@ export default defineComponent({
         params: {
           access_token: process.env.NUXT_ENV_ACCESS_TOKEN,
           filter_work_id: id,
-          sort_sort_number: 'asc'
+          sort_sort_number: SORT_ASC_PARAM
         }
       }),
       $axios.$get<Casts>('/casts', {
         params: {
           access_token: process.env.NUXT_ENV_ACCESS_TOKEN,
           filter_work_id: id,
-          sort_sort_number: 'asc'
+          sort_sort_number: SORT_ASC_PARAM
         }
       })
     ])
